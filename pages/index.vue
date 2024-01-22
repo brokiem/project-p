@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const route = useRoute()
+import Navbar from "~/components/Navbar.vue";
+
+const route = useRoute();
 </script>
 
 <template>
   <div>
-    <h1 class="text-3xl font-bold underline">
-      Hello {{ route.fullPath}}!
-    </h1>
+    <Navbar />
   </div>
 </template>

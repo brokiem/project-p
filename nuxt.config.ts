@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/tailwindcss",
     "@nuxt/image",
+    "@nuxtjs/tailwindcss",
     ['@nuxtjs/google-fonts', {
       families: {
         Rubik: [100, 300, 400, 500, 700, 900],

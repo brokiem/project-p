@@ -2,12 +2,13 @@
 import {defineComponent} from 'vue'
 import BarIcon from "~/components/icons/BarIcon.vue";
 import ChevronDownIcon from "~/components/icons/ChevronDownIcon.vue";
+import {initFlowbite} from "flowbite";
 
 export default defineComponent({
   name: "Navbar",
   components: {ChevronDownIcon, BarIcon},
   mounted() {
-
+    initFlowbite();
   }
 })
 </script>
@@ -24,7 +25,7 @@ export default defineComponent({
   </nav>
 
   <!-- Second Navbar -->
-  <nav id="navbar" class="px-4 sm:px-4 dark:bg-gray-900 fixed w-full z-20 sticky top-0 left-0 bg-white shadow-md transition duration-150">
+  <nav id="navbar" class="px-4 sm:px-4 dark:bg-gray-900 w-full z-20 sticky top-0 left-0 bg-white shadow-md transition duration-150">
     <div class="container-lg flex flex-wrap items-center justify-between mx-auto">
       <div class="flex items-center"></div>
 

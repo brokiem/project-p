@@ -21,6 +21,7 @@
   "author": "brokiem",
   "license": "MIT",
   "dependencies": {
+    "@heroicons/vue": "^2.1.1",
     "flowbite": "^2.2.1"
   }
 }

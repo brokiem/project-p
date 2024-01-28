@@ -1,12 +1,11 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import BarIcon from "~/components/icons/BarIcon.vue";
-import ChevronDownIcon from "~/components/icons/ChevronDownIcon.vue";
 import {initFlowbite} from "flowbite";
+import { ChevronDownIcon, Bars3Icon } from '@heroicons/vue/20/solid';
 
 export default defineComponent({
   name: "Navbar",
-  components: {ChevronDownIcon, BarIcon},
+  components: {ChevronDownIcon, Bars3Icon},
   mounted() {
     initFlowbite();
   }
@@ -33,7 +32,7 @@ export default defineComponent({
       <div class="flex md:order-2">
         <button data-collapse-toggle="navbar-cta" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 md:hover:text-blue-700 dark:text-gray-400 dark:hover:bg-gray-700" aria-controls="navbar-cta" aria-expanded="false">
           <span class="sr-only">Open main menu</span>
-          <BarIcon/>
+          <Bars3Icon class="w-5 h-5 inline"/>
         </button>
       </div>
 
@@ -48,7 +47,7 @@ export default defineComponent({
           </li>
           <li>
             <div data-dropdown-toggle="profile-dropdown" class="cursor-pointer select-none block py-2 pl-3 pr-4 bg-gray-100 md:bg-transparent text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-              Profil <ChevronDownIcon/>
+              Profil <ChevronDownIcon class="w-5 h-5 inline"/>
 
               <!-- Profile dropdown -->
               <div id="profile-dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow border dark:bg-gray-700">
@@ -74,7 +73,7 @@ export default defineComponent({
           </li>
           <li>
             <div data-dropdown-toggle="artikel-dropdown" class="cursor-pointer select-none block py-2 pl-3 pr-4 bg-gray-100 md:bg-transparent text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-              Artikel <ChevronDownIcon/>
+              Artikel <ChevronDownIcon class="w-5 h-5 inline"/>
 
               <!-- Article dropdown -->
               <div id="artikel-dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow border dark:bg-gray-700">
@@ -96,7 +95,7 @@ export default defineComponent({
           </li>
           <li>
             <div data-dropdown-toggle="kesiswaan-dropdown" class="cursor-pointer select-none block py-2 pl-3 pr-4 bg-gray-100 md:bg-transparent text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-              Kesiswaan <ChevronDownIcon/>
+              Kesiswaan <ChevronDownIcon class="w-5 h-5 inline"/>
 
               <!-- Kesiswaan dropdown -->
               <div id="kesiswaan-dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow border dark:bg-gray-700">

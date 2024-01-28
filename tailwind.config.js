@@ -12,7 +12,11 @@ export default {
         "./node_modules/flowbite/**/*.{js,ts}"
     ],
     theme: {
-        extend: {},
+        extend: {
+            maxWidth: {
+                'default': '950px',
+            },
+        },
     },
     plugins: [
         require('flowbite/plugin'),

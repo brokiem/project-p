@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Navbar from "~/components/Navbar.vue";
-
 const route = useRoute();
 </script>
 
@@ -11,7 +9,7 @@ const route = useRoute();
     <!-- Header section -->
     <div class="relative">
       <!-- Front page image header -->
-      <NuxtImg class="w-full h-[99vh] object-cover" src="https://cdn-smkn2tabanan.netlify.app/images/atas-blur-min.webp" alt="Atas SMK DUTA" />
+      <NuxtImg class="w-full h-[99vh] object-cover" src="/atas-blur-min.webp" alt="Atas SMK DUTA" />
 
       <!-- Card header -->
       <div class="p-6 pt-10 pb-10 w-[95%] md:max-w-lg min-h-[250px] md:min-h-[230px] mx-auto bg-white rounded-md shadow-sm flex items-center space-x-4 absolute right-2 md:right-[8rem] top-[8rem] md:top-[12rem]">

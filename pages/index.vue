@@ -64,5 +64,7 @@ const route = useRoute();
         </div>
       </div>
     </section>
+
+    <Footer />
   </div>
 </template>

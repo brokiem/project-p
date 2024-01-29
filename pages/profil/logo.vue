@@ -24,7 +24,7 @@ useHead({
       <!-- Page card -->
       <div class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
         <!-- Bentuk Dasar -->
-        <h5 class="mb-2 text-xl font-medium tracking-tight text-gray-700 dark:text-white">
+        <h5 class="mb-2 text-xl font-medium tracking-tight text-black dark:text-white">
           Bentuk Dasar Lingkaran
         </h5>
         <!-- Description -->
@@ -33,7 +33,7 @@ useHead({
         </p>
 
         <!-- Warna Latar -->
-        <h5 class="mb-2 mt-6 text-xl font-medium tracking-tight text-gray-700 dark:text-white">
+        <h5 class="mb-2 mt-6 text-xl font-medium tracking-tight text-black dark:text-white">
           Warna Latar Abu - Abu
         </h5>
         <!-- Definisi -->
@@ -42,7 +42,7 @@ useHead({
         </p>
 
         <!-- Warna Globe -->
-        <h5 class="mb-2 mt-6 text-xl font-medium tracking-tight text-gray-700 dark:text-white">
+        <h5 class="mb-2 mt-6 text-xl font-medium tracking-tight text-black dark:text-white">
           Warna Globe Biru
         </h5>
         <!-- Definisi -->
@@ -51,7 +51,7 @@ useHead({
         </p>
 
         <!-- Title -->
-        <h5 class="mb-2 mt-6 text-xl font-medium tracking-tight text-gray-700 dark:text-white">
+        <h5 class="mb-2 mt-6 text-xl font-medium tracking-tight text-black dark:text-white">
           Warna Tiga Gelang Tridatu
         </h5>
         <!-- Description -->
@@ -60,7 +60,7 @@ useHead({
         </p>
 
         <!-- Title -->
-        <h5 class="mb-2 mt-6 text-xl font-medium tracking-tight text-gray-700 dark:text-white">
+        <h5 class="mb-2 mt-6 text-xl font-medium tracking-tight text-black dark:text-white">
           Jnana Wicesa Suddha
         </h5>
         <!-- Description -->

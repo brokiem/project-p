@@ -12,10 +12,10 @@ useHead({
     <!-- Page title -->
     <Header title="Visi &amp; Misi"></Header>
 
-    <div class="container mx-auto px-4 md:max-w-default py-10">
+    <div class="container mx-auto px-4 md:max-w-default py-10 space-y-4">
       <div class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
         <!-- Visi -->
-        <h5 class="mb-2 text-2xl font-base tracking-tight text-black dark:text-white">
+        <h5 class="mb-2 text-xl font-medium tracking-tight text-black dark:text-white">
           Visi
         </h5>
         <!-- Visi contents -->
@@ -24,9 +24,9 @@ useHead({
         </p>
       </div>
 
-      <div class="mt-4 block w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <div class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
         <!-- Misi -->
-        <h5 class="mb-2 text-2xl font-base tracking-tight text-black dark:text-white">
+        <h5 class="mb-2 text-xl font-medium tracking-tight text-black dark:text-white">
           Misi
         </h5>
         <!-- Misi contents -->

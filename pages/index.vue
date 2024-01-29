@@ -1,11 +1,14 @@
 <script setup lang="ts">
-const route = useRoute();
+useHead({
+  title: 'SMK Negeri 2 Tabanan',
+  meta: [
+    { name: 'description', content: 'Terwujudnya peserta didik yang terdidik, cerdas, terampil, mandiri dan berdaya saing global' }
+  ],
+});
 </script>
 
 <template>
   <div>
-    <Navbar />
-
     <!-- Header section -->
     <div class="relative">
       <!-- Front page image header -->
@@ -64,7 +67,9 @@ const route = useRoute();
         </div>
       </div>
     </section>
-
-    <Footer />
   </div>
 </template>
+
+<style>
+
+</style>

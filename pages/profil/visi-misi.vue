@@ -1,12 +1,14 @@
 <script setup lang="ts">
-
+useHead({
+  title: 'Profil - SMK Negeri 2 Tabanan',
+  meta: [
+    { name: 'description', content: 'Terwujudnya peserta didik yang terdidik, cerdas, terampil, mandiri dan berdaya saing global' }
+  ],
+});
 </script>
 
 <template>
   <div>
-    <!-- Navbar -->
-    <Navbar/>
-
     <!-- Page title -->
     <Header title="Visi &amp; Misi"></Header>
 
@@ -41,9 +43,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Footer -->
-    <Footer/>
   </div>
 </template>
 

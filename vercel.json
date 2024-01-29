@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/test.php": {
+      "runtime": "vercel-deno@3.0.4"
+    }
+  }
+}

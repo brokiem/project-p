@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "pages": {
-      "runtime": "vercel-deno@3.0.4"
-    }
-  }
-}

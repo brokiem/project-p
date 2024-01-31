@@ -32,7 +32,12 @@ useHead({
     </div>
 
     <!-- Kompetensi Keahlian section -->
-    <section id="kompetensi-keahlian" class="bg-white dark:bg-gray-900" style="background-color: #F8F9FC;">
+    <div class="relative">
+      <!-- Fake section to compensate section with navbar -->
+      <section id="kompetensi-keahlian" class="absolute bottom-12" />
+    </div>
+    <!-- Real section -->
+    <div class="bg-white dark:bg-gray-900" style="background-color: #F8F9FC;">
       <div class="container mx-auto">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
           <!-- Section title -->
@@ -66,7 +71,7 @@ useHead({
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </div>
 </template>
 

@@ -10,7 +10,7 @@
   <slot />
 
   <!-- Footer default layout -->
-  <Footer />
+  <LazyFooter />
 </template>
 
 <style scoped>

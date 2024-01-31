@@ -107,7 +107,7 @@ export default defineComponent({
                     <NuxtLink to="/kesiswaan/tatatertib" class="no-underline text-gray-700 block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Tata Tertib</NuxtLink>
                   </li>
                   <li>
-                    <NuxtLink to="/kesiswaan/ekstrakulikuler" class="no-underline text-gray-700 block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ekstrakulikuler</NuxtLink>
+                    <NuxtLink to="/kesiswaan/ekstrakurikuler" class="no-underline text-gray-700 block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ekstrakurikuler</NuxtLink>
                   </li>
                 </ul>
               </div>

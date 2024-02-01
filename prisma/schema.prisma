@@ -16,17 +16,17 @@ model users {
 }
 
 model articles {
-  id         Int           @id @default(autoincrement())
-  image_url  String        @db.VarChar(535)
-  title      String        @db.VarChar(535)
-  content    String        @db.Text
-  user_uuid  String        @db.VarChar(535)
-  created_at DateTime      @db.Date
-  updated_at DateTime      @db.Date
-  type       articles_type
-  users      users         @relation(fields: [user_uuid], references: [uuid], onUpdate: Restrict, map: "articles_ibfk_1")
+  id          Int           @id @default(autoincrement())
+  image_url   String        @db.VarChar(535)
+  title       String        @db.VarChar(535)
+  content     String        @db.Text
+  author_uuid String        @db.VarChar(535)
+  created_at  DateTime      @db.Date
+  updated_at  DateTime      @db.Date
+  type        articles_type
+  users       users         @relation(fields: [author_uuid], references: [uuid], onUpdate: Restrict, map: "articles_ibfk_1")
 
-  @@index([user_uuid], map: "user_uuid")
+  @@index([author_uuid], map: "user_uuid")
 }
 
 enum articles_type {

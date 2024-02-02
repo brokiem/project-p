@@ -26,10 +26,10 @@ export default defineEventHandler(async (event) => {
     }), {status: 401});
   }
 
-  const {uuid, username} = user;
+  const {uuid, username, permissions} = user;
   // Create a token using jwt
   const jwtSecretKey = process.env.JWT_SECRET_KEY;
-  const token = jwt.sign({uuid, username, email}, jwtSecretKey!, {
+  const token = jwt.sign({uuid, username, email, permissions}, jwtSecretKey!, {
     algorithm: 'HS384',
     expiresIn: 86400 // expires in 24 hours
   });

@@ -30,6 +30,6 @@
   "author": "brokiem",
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "5.9.0"
+    "@prisma/client": "^5.9.1"
   }
 }

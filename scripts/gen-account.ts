@@ -34,8 +34,11 @@ const generateAccount = async () => {
   }
   // get password
   const rawPass = readlineSync.question('Please enter the password: ');
+
+  console.log("> Generating password hash...");
+
   // hash password
-  bcrypt.genSalt(8, function (err, salt) {
+  bcrypt.genSalt(16, function (err, salt) {
     if (err) return console.log("Error: Failed to create salt");
 
     bcrypt.hash(rawPass, salt, function (err, hash) {

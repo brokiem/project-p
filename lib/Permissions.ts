@@ -1,4 +1,4 @@
-import type { User } from "~/lib/User";
+import type { users as User } from "@prisma/client";
 
 export enum Permissions {
   // Allows creation of news

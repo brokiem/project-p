@@ -1,13 +1,11 @@
-import {PrismaClient} from "@prisma/client";
-import {Permissions} from "~/lib/Permissions";
-import {ArticleType} from "~/lib/ArticleType";
+import { PrismaClient, article_type as ArticleType } from "@prisma/client";
+import { Permissions } from "~/lib/Permissions";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  // @ts-ignore
   const admin = await prisma.users.upsert({
-    where: {uuid: 'b600a28a-0c1d-4b28-9f38-9d49ca07e9b6'},
+    where: { uuid: 'b600a28a-0c1d-4b28-9f38-9d49ca07e9b6' },
     update: {},
     create: {
       uuid: 'b600a28a-0c1d-4b28-9f38-9d49ca07e9b6',
@@ -18,9 +16,8 @@ async function main() {
     },
   });
 
-  // @ts-ignore
   const newsArticle = await prisma.articles.upsert({
-    where: {id: 1},
+    where: { id: 1 },
     update: {},
     create: {
       id: 1,
@@ -32,9 +29,8 @@ async function main() {
     },
   });
 
-  // @ts-ignore
   const announcementArticle = await prisma.articles.upsert({
-    where: {id: 2},
+    where: { id: 2 },
     update: {},
     create: {
       id: 2,
@@ -46,13 +42,11 @@ async function main() {
     },
   });
 
-  console.log({admin, newsArticle, announcementArticle});
+  console.log({ admin, newsArticle, announcementArticle });
 }
 
-main()
-  .catch(e => {
-    throw e;
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+main().catch(e => {
+  throw e;
+}).finally(async () => {
+  await prisma.$disconnect();
+});

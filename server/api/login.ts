@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import {prisma} from "~/prisma/db";
 
 export default defineEventHandler(async (event) => {
-  const {email, password_hash} = await readBody(event);
+  const {email, password} = await readBody(event);
 
   const user = await prisma.users.findFirst({
     where: {email},
@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // Check if the password is valid using bcrypt
-  const isPasswordValid = await bcrypt.compare(password_hash, user.password_hash);
+  const isPasswordValid = await bcrypt.compare(password, user.password_hash);
 
   if (!isPasswordValid) {
     return new Response(JSON.stringify({

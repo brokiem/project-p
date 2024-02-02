@@ -17,11 +17,13 @@
     "@pinia/nuxt": "^0.5.1",
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.5",
+    "@types/readline-sync": "^1.4.8",
     "bcrypt": "^5.1.1",
     "flowbite": "^2.2.1",
     "jsonwebtoken": "^9.0.2",
     "nuxt": "^3.9.3",
     "prisma": "^5.9.0",
+    "readline-sync": "^1.4.10",
     "vue": "^3.4.14",
     "vue-router": "^4.2.5"
   },

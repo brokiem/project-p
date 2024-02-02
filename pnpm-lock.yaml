@@ -31,6 +31,9 @@ devDependencies:
   '@types/jsonwebtoken':
     specifier: ^9.0.5
     version: 9.0.5
+  '@types/readline-sync':
+    specifier: ^1.4.8
+    version: 1.4.8
   bcrypt:
     specifier: ^5.1.1
     version: 5.1.1
@@ -46,6 +49,9 @@ devDependencies:
   prisma:
     specifier: ^5.9.0
     version: 5.9.0
+  readline-sync:
+    specifier: ^1.4.10
+    version: 1.4.10
   vue:
     specifier: ^3.4.14
     version: 3.4.15
@@ -1925,6 +1931,10 @@ packages:
     resolution: {integrity: sha512-g557vgQjUUfN76MZAN/dt1z3dzcUsimuysco0KeluHgrPdJXkP/XdAURgyO2W9fZWHRtRBiVKzKn8vyOAwlG+w==}
     dependencies:
       undici-types: 5.26.5
+    dev: true
+
+  /@types/readline-sync@1.4.8:
+    resolution: {integrity: sha512-BL7xOf0yKLA6baAX6MMOnYkoflUyj/c7y3pqMRfU0va7XlwHAOTOIo4x55P/qLfMsuaYdJJKubToLqRVmRtRZA==}
     dev: true
 
   /@types/resolve@1.20.2:
@@ -5818,6 +5828,11 @@ packages:
     engines: {node: '>=8.10.0'}
     dependencies:
       picomatch: 2.3.1
+    dev: true
+
+  /readline-sync@1.4.10:
+    resolution: {integrity: sha512-gNva8/6UAe8QYepIQH/jQ2qn91Qj0B9sYjMBBs3QOB8F2CXcKgLxQaJRP76sWVRQt+QU+8fAkCbCvjjMFu7Ycw==}
+    engines: {node: '>= 0.8.0'}
     dev: true
 
   /redis-errors@1.2.0:

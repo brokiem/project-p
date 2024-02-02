@@ -4248,7 +4248,6 @@ packages:
   /is-wsl@3.1.0:
     resolution: {integrity: sha512-UcVfVfaK4Sc4m7X3dUSoHoozQGBEFeDC+zVo06t98xe8CzHSZZBekNXH+tu0NalHolcJ/QAGqS46Hef7QXBIMw==}
     engines: {node: '>=16'}
-    requiresBuild: true
     dependencies:
       is-inside-container: 1.0.0
     dev: true

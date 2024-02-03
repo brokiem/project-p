@@ -13,6 +13,8 @@ export enum Permissions {
   ADMINISTRATOR = 1 << 4,
   // Allows no permissions
   NONE = 1 << 5,
+  CREATE_EXTRACURRICULAR = 1 << 6,
+  MANAGE_EXTRACURRICULAR = 1 << 7,
 }
 
 // Check if a user has a permission

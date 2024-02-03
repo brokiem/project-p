@@ -25,6 +25,7 @@ model articles {
   created_at  DateTime     @default(now()) @db.DateTime()
   updated_at  DateTime?    @db.DateTime()
   type        article_type
+  flags       Int?
   users       users        @relation(fields: [author_uuid], references: [uuid], onUpdate: Restrict, map: "articles_ibfk_1")
 
   @@index([author_uuid], map: "user_uuid")

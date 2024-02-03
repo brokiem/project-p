@@ -3,9 +3,12 @@ import EkstrakulikulerCard from "~/components/EkstrakurikulerCard.vue";
 import ekstrakurikuler from "~/assets/ekstrakulikuler.json";
 
 useHead({
-  title: 'Kesiswaan - SMK Negeri 2 Tabanan',
+  title: "Kesiswaan - SMK Negeri 2 Tabanan",
   meta: [
-    { name: 'description', content: 'Terwujudnya peserta didik yang terdidik, cerdas, terampil, mandiri dan berdaya saing global' }
+    {
+      name: "description",
+      content: "Terwujudnya peserta didik yang terdidik, cerdas, terampil, mandiri dan berdaya saing global",
+    },
   ],
 });
 </script>

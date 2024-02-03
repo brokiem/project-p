@@ -8,13 +8,16 @@
 ::-webkit-scrollbar {
     width: 6px;
 }
+
 ::-webkit-scrollbar-track {
     background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
     background: #b2b2b2;
     border-radius: 0.3rem;
 }
+
 ::-webkit-scrollbar-thumb:hover {
     background: #919191;
     border-radius: 0.3rem;

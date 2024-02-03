@@ -8,7 +8,8 @@
 
   <div class="container mx-auto px-4 md:max-w-default py-10 space-y-4">
     <!-- Card -->
-    <div class="flex flex-col lg:flex-row items-center w-full bg-white border border-gray-300 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+    <div
+        class="flex flex-col lg:flex-row items-center w-full bg-white border border-gray-300 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
       <!-- Card image -->
       <div class="flex flex-col justify-between leading-normal p-6">
         <!-- Title -->
@@ -17,7 +18,7 @@
         </h5>
         <!-- Description -->
         <p class="mt-1 text-base font-normal text-gray-700 dark:text-gray-400">
-          SMKN 2 Tabanan  memiliki 3 bengkel komputer utama lengkap dengan LAN beserta jaringan internet.
+          SMKN 2 Tabanan memiliki 3 bengkel komputer utama lengkap dengan LAN beserta jaringan internet.
           Ruangan sejuk dengan berpendingin AC untuk selalu menjaga suhu ruangan yang dilengkapi dengan
           LCD Proyektor sehingga pelaksanaan kegiatan pembelajaran berlangsung dengan nyaman.
         </p>
@@ -25,7 +26,8 @@
     </div>
 
     <!-- Card -->
-    <div class="flex flex-col lg:flex-row items-center w-full bg-white border border-gray-300 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+    <div
+        class="flex flex-col lg:flex-row items-center w-full bg-white border border-gray-300 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
       <!-- Card image -->
       <div class="flex flex-col justify-between leading-normal p-6">
         <!-- Title -->
@@ -41,7 +43,8 @@
     </div>
 
     <!-- Card -->
-    <div class="flex flex-col lg:flex-row items-center w-full bg-white border border-gray-300 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+    <div
+        class="flex flex-col lg:flex-row items-center w-full bg-white border border-gray-300 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
       <!-- Card image -->
       <div class="flex flex-col justify-between leading-normal p-6">
         <!-- Title -->
@@ -58,7 +61,8 @@
     </div>
 
     <!-- Card -->
-    <div class="flex flex-col lg:flex-row items-center w-full bg-white border border-gray-300 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+    <div
+        class="flex flex-col lg:flex-row items-center w-full bg-white border border-gray-300 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
       <!-- Card image -->
       <div class="flex flex-col justify-between leading-normal p-6">
         <!-- Title -->

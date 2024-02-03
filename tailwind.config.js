@@ -1,6 +1,6 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 export default {
-    darkMode: 'class',
+    darkMode: "class",
     content: [
         "./components/**/*.{js,vue,ts}",
         "./layouts/**/*.vue",
@@ -9,16 +9,16 @@ export default {
         "./app.vue",
         "./error.vue",
         "./nuxt.config.{js,ts}",
-        "./node_modules/flowbite/**/*.{js,ts}"
+        "./node_modules/flowbite/**/*.{js,ts}",
     ],
     theme: {
         extend: {
             maxWidth: {
-                'default': '950px',
+                "default": "950px",
             },
         },
     },
     plugins: [
-        require('flowbite/plugin'),
+        require("flowbite/plugin"),
     ],
-}
+};

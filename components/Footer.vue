@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {MapPinIcon, PhoneIcon, EnvelopeIcon} from '@heroicons/vue/20/solid';
+import { EnvelopeIcon, MapPinIcon, PhoneIcon } from "@heroicons/vue/20/solid";
 import FacebookIcon from "~/components/icons/FacebookIcon.vue";
 import InstagramIcon from "~/components/icons/InstagramIcon.vue";
 import YouTubeIcon from "~/components/icons/YouTubeIcon.vue";

@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
   const jwtSecretKey = process.env.JWT_SECRET_KEY;
   const token = jwt.sign({uuid, username, email, permissions}, jwtSecretKey!, {
     algorithm: 'HS384',
-    expiresIn: 86400 // expires in 24 hours
+    expiresIn: '7d' // expires in 7 days
   });
 
   return new Response(JSON.stringify({

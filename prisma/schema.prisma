@@ -7,31 +7,59 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model users {
-  uuid          String     @id @db.VarChar(36)
-  username      String     @db.VarChar(64)
-  email         String     @db.VarChar(320)
-  password_hash String     @db.Text
-  permissions   Int
-  articles      articles[]
-}
-
 model articles {
-  id          Int          @id @default(autoincrement())
-  image_url   String       @db.Text
-  title       String       @db.VarChar(535)
-  content     String       @db.Text
-  author_uuid String       @db.VarChar(36)
-  created_at  DateTime     @default(now()) @db.DateTime()
-  updated_at  DateTime?    @db.DateTime()
-  type        article_type
+  id          Int           @id @default(autoincrement())
+  image_url   String        @db.Text
+  title       String        @db.VarChar(60)
+  content     String        @db.Text
+  author_uuid String        @db.VarChar(36)
+  created_at  DateTime      @default(now()) @db.DateTime(0)
+  updated_at  DateTime?     @db.DateTime(0)
+  type        articles_type
   flags       Int?
-  users       users        @relation(fields: [author_uuid], references: [uuid], onUpdate: Restrict, map: "articles_ibfk_1")
+  users       users         @relation(fields: [author_uuid], references: [uuid], onUpdate: Restrict, map: "articles_ibfk_1")
 
-  @@index([author_uuid], map: "user_uuid")
+  @@index([author_uuid], map: "author_uuid")
 }
 
-enum article_type {
+model extracurricular_mentors {
+  id                 Int              @id @default(autoincrement())
+  mentor_uuid        String           @db.VarChar(36)
+  extracurricular_id Int
+  extracurriculars   extracurriculars @relation(fields: [extracurricular_id], references: [id], onUpdate: Restrict, map: "extracurricular_mentors_ibfk_1")
+  users              users            @relation(fields: [mentor_uuid], references: [uuid], onUpdate: Restrict, map: "extracurricular_mentors_ibfk_2")
+
+  @@index([extracurricular_id], map: "extracurricular_id")
+  @@index([mentor_uuid], map: "mentor_uuid")
+}
+
+model extracurriculars {
+  id                      Int                       @id @default(autoincrement())
+  title                   String                    @db.VarChar(64)
+  description             String                    @db.Text
+  extracurricular_mentors extracurricular_mentors[]
+}
+
+model user_permissions {
+  id          Int    @id @default(autoincrement())
+  user_uuid   String @db.VarChar(36)
+  permissions Int
+  users       users  @relation(fields: [user_uuid], references: [uuid], onUpdate: Restrict, map: "user_permissions_ibfk_1")
+
+  @@index([user_uuid], map: "user_uuid")
+}
+
+model users {
+  uuid                    String                    @id @db.VarChar(36)
+  username                String                    @db.VarChar(64)
+  email                   String                    @db.VarChar(320)
+  password_hash           String                    @db.VarChar(60)
+  articles                articles[]
+  extracurricular_mentors extracurricular_mentors[]
+  user_permissions        user_permissions[]
+}
+
+enum articles_type {
   NEWS
   ANNOUNCEMENT
 }

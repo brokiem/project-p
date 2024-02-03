@@ -16,6 +16,17 @@ export default defineEventHandler(async (event) => {
     }), {status: 404});
   }
 
+  const user_permissions = await prisma.user_permissions.findFirst({
+    where: {user_uuid: user.uuid}
+  });
+
+  if (!user_permissions) {
+    return new Response(JSON.stringify({
+      success: false,
+      error: 'User permissions not found',
+    }), {status: 404});
+  }
+
   // Check if the password is valid using bcrypt
   const isPasswordValid = await bcrypt.compare(password, user.password_hash);
 
@@ -26,9 +37,10 @@ export default defineEventHandler(async (event) => {
     }), {status: 401});
   }
 
-  const {uuid, username, permissions} = user;
+  const {uuid, username} = user;
   // Create a token using jwt
   const jwtSecretKey = process.env.JWT_SECRET_KEY;
+  const permissions = user_permissions.permissions;
   const token = jwt.sign({uuid, username, email, permissions}, jwtSecretKey!, {
     algorithm: 'HS384',
     expiresIn: '7d' // expires in 7 days

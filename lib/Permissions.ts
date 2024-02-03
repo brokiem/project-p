@@ -1,4 +1,4 @@
-import type { users as User } from "@prisma/client";
+import type { user_permissions as UserPermissions } from "@prisma/client";
 
 export enum Permissions {
   // Allows creation of news
@@ -16,12 +16,12 @@ export enum Permissions {
 }
 
 // Check if a user has a permission
-export const hasPermission = (user: User, permission: Permissions) => {
+export const hasPermission = (user_permissions: UserPermissions, permission: Permissions) => {
   // If the user is an administrator, they have all permissions
-  if ((user.permissions & Permissions.ADMINISTRATOR) === Permissions.ADMINISTRATOR) {
+  if ((user_permissions.permissions & Permissions.ADMINISTRATOR) === Permissions.ADMINISTRATOR) {
     return true;
   }
 
   // Otherwise, check if the user has the permission
-  return (user.permissions & permission) === permission;
+  return (user_permissions.permissions & permission) === permission;
 };

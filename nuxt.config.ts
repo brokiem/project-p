@@ -9,6 +9,9 @@ export default defineNuxtConfig({
     routeRules: {
         "/": { prerender: true },
     },
+    runtimeConfig: {
+        jwtSecretKey: process.env.JWT_SECRET_KEY,
+    },
     devtools: { enabled: true },
     modules: [
         "@pinia/nuxt",

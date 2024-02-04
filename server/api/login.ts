@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
 
     const { uuid, username } = user;
     // Create a token using jwt
-    const jwtSecretKey = process.env.JWT_SECRET_KEY;
+    const { jwtSecretKey } = useRuntimeConfig();
     const permissions = user_permissions.permissions;
     const token = jwt.sign({ uuid, username, email, permissions }, jwtSecretKey!, {
         algorithm: "HS384",

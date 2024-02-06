@@ -1,5 +1,6 @@
 import { articles_type as ArticleType, PrismaClient } from "@prisma/client";
 import { Permissions } from "~/lib/Permissions";
+import { Roles } from "~/lib/Roles";
 
 const prisma = new PrismaClient();
 
@@ -15,13 +16,14 @@ async function main() {
         },
     });
 
-    const permission = await prisma.user_permissions.upsert({
+    const permission = await prisma.user_attributes.upsert({
         where: { id: 1 },
         update: {},
         create: {
             id: 1,
             user_uuid: admin.uuid,
             permissions: Permissions.ADMINISTRATOR,
+            roles: Roles.ADMIN,
         },
     });
 
@@ -70,6 +72,16 @@ async function main() {
             },
         });
     }
+
+    await prisma.competencies.upsert({
+       where: { id: 1 },
+       update: {},
+       create: {
+           id: 1,
+           title: "Rekayasa Perangkat Lunak",
+           description: "Biasa disebut RPL, sebuah jurusan yang mempelajari dan mendalami pengembangn perangkat lunak mulai dari pembuatan website, aplikasi, game dan semua yang berkaitan dengan pemrograman."
+       }
+    });
 
     console.log("Seeding done!");
 }

@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
         }), { status: 404 });
     }
 
-    const user_permissions = await prisma.user_permissions.findFirst({
+    const user_permissions = await prisma.user_attributes.findFirst({
         where: { user_uuid: user.uuid },
     });
 

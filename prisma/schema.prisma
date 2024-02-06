@@ -59,6 +59,12 @@ model users {
   user_permissions        user_permissions[]
 }
 
+model competencies {
+  id          Int    @id @default(autoincrement())
+  title       String @db.VarChar(32)
+  description String @db.VarChar(255)
+}
+
 enum articles_type {
   NEWS
   ANNOUNCEMENT

@@ -16,15 +16,16 @@ export default defineEventHandler(async (event) => {
         }), { status: 404 });
     }
 
-    const user_permissions = await prisma.user_attributes.findFirst({
+    const userAttributes = await prisma.user_attributes.findFirst({
         where: { user_uuid: user.uuid },
     });
 
-    if (!user_permissions) {
+    if (!userAttributes) {
+        // Return 500 here because the user attributes should always exist
         return new Response(JSON.stringify({
             success: false,
-            error: "User permissions not found",
-        }), { status: 404 });
+            error: "User attributes not found",
+        }), { status: 500 });
     }
 
     // Check if the password is valid using bcrypt
@@ -38,10 +39,10 @@ export default defineEventHandler(async (event) => {
     }
 
     const { uuid, username } = user;
-    // Create a token using jwt
     const { jwtSecretKey } = useRuntimeConfig();
-    const permissions = user_permissions.permissions;
-    const token = jwt.sign({ uuid, username, email, permissions }, jwtSecretKey!, {
+    const { permissions, roles } = userAttributes;
+
+    const token = jwt.sign({ uuid, username, email, permissions, roles }, jwtSecretKey!, {
         algorithm: "HS384",
         expiresIn: "7d", // expires in 7 days
     });

@@ -1,6 +1,6 @@
 import { articles_type as ArticleType, PrismaClient } from "@prisma/client";
-import { Permissions } from "~/lib/Permissions";
-import { Roles } from "~/lib/Roles";
+import { Permissions } from "~/utils/permissions";
+import { Roles } from "~/utils/roles";
 
 const prisma = new PrismaClient();
 
@@ -16,7 +16,7 @@ async function main() {
         },
     });
 
-    const permission = await prisma.user_attributes.upsert({
+    await prisma.user_attributes.upsert({
         where: { id: 1 },
         update: {},
         create: {
@@ -27,7 +27,7 @@ async function main() {
         },
     });
 
-    const newsArticle = await prisma.articles.upsert({
+    await prisma.articles.upsert({
         where: { id: 1 },
         update: {},
         create: {
@@ -40,7 +40,7 @@ async function main() {
         },
     });
 
-    const announcementArticle = await prisma.articles.upsert({
+    await prisma.articles.upsert({
         where: { id: 2 },
         update: {},
         create: {

@@ -22,3 +22,8 @@ export enum Roles {
     // Web Admin
     ADMIN = 1 << 9,
 }
+
+// Check if a user has a role
+export const hasRole = (userAttributes: UserAttributes, role: Roles) => {
+    return (userAttributes.roles & role) === role;
+};

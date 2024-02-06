@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     runtimeConfig: {
         jwtSecretKey: process.env.JWT_SECRET_KEY,
     },
-    devtools: { enabled: true },
+    devtools: { enabled: false },
     modules: [
         "@pinia/nuxt",
         "@nuxtjs/tailwindcss",

@@ -1,6 +1,6 @@
+import { prisma } from "~/prisma/db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { prisma } from "~/prisma/db";
 
 export default defineEventHandler(async (event) => {
     const { email, password } = await readBody(event);

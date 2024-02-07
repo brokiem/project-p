@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
         return new Response(JSON.stringify({
             success: false,
             error: "User not found",
-        }), { status: 404 });
+        }), { status: 404 }).json();
     }
 
     const userAttributes = await prisma.user_attributes.findFirst({
@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
         return new Response(JSON.stringify({
             success: false,
             error: "User attributes not found",
-        }), { status: 500 });
+        }), { status: 500 }).json();
     }
 
     // Check if the password is valid using bcrypt
@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
         return new Response(JSON.stringify({
             success: false,
             error: "Invalid password",
-        }), { status: 401 });
+        }), { status: 401 }).json();
     }
 
     const { uuid, username } = user;
@@ -50,5 +50,5 @@ export default defineEventHandler(async (event) => {
     return new Response(JSON.stringify({
         success: true,
         message: token,
-    }), { status: 200 });
+    })).json();
 });

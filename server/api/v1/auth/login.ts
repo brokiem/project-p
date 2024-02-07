@@ -49,6 +49,8 @@ export default defineEventHandler(async (event) => {
 
     return new Response(JSON.stringify({
         success: true,
-        message: token,
+        message: {
+            token
+        },
     })).json();
 });

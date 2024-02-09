@@ -17,15 +17,6 @@ export interface SuccessResult<T> extends Result {
     message: T;
 }
 
-export interface LoginResult {
-    token: string;
-    user: User;
-}
-
-export interface VerifyResult {
-    user: User;
-}
-
 function makeRequest<T>(url: string, options: RequestInit): Promise<T> {
     return new Promise<T>(async (resolve, reject) => {
         const response = await fetch(url, options);
@@ -43,12 +34,9 @@ function makeRequest<T>(url: string, options: RequestInit): Promise<T> {
 
 /**
  * Login to the website
- * @param username
- * @param password
- * @returns Promise<LoginResult>
  */
 export async function login(username: string, password: string) {
-    return makeRequest<LoginResult>(`${API_ROUTE}/auth/login`, {
+    return makeRequest<{ token: string; user: User; }>(`${API_ROUTE}/auth/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -62,11 +50,64 @@ export async function login(username: string, password: string) {
 
 /**
  * Verify a token
- * @param token
- * @returns Promise<VerifyResult>
  */
 export async function verify(token: string) {
-    return makeRequest<VerifyResult>(`${API_ROUTE}/auth/verify`, {
+    return makeRequest<{ user: User; }>(`${API_ROUTE}/auth/verify`, {
+        headers: {
+            "Authorization": `Bearer ${token}`,
+        },
+    });
+}
+
+/**
+ * Fetch all competencies
+ */
+export async function fetchCompetencies() {
+    return makeRequest<{ competencies: { id: number; title: string; description: string; } }>(`${API_ROUTE}/competencies`, {
+        method: "GET",
+    });
+}
+
+/**
+ * Create a new competency
+ */
+export async function createCompetency(title: string, description: string, token: string) {
+    return makeRequest<{ competency: { id: number; title: string; description: string; } }>(`${API_ROUTE}/competencies`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            title,
+            description,
+        }),
+    });
+}
+
+/**
+ * Update a competency
+ */
+export async function updateCompetency(id: number, title: string, description: string, token: string) {
+    return makeRequest<{ competencies: { id: number; title: string; description: string; } }>(`${API_ROUTE}/competencies/${id}`, {
+        method: "PATCH",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            title,
+            description,
+        }),
+    });
+}
+
+/**
+ * Delete a competency
+ */
+export async function deleteCompetency(id: number, token: string) {
+    return makeRequest<{ competencies: { id: number; title: string; description: string; } }>(`${API_ROUTE}/competencies/${id}`, {
+        method: "DELETE",
         headers: {
             "Authorization": `Bearer ${token}`,
         },

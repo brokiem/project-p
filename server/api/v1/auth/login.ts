@@ -50,7 +50,14 @@ export default defineEventHandler(async (event) => {
     return new Response(JSON.stringify({
         success: true,
         message: {
-            token
+            token,
+            user: {
+                uuid,
+                username,
+                email,
+                permissions,
+                roles,
+            },
         },
     })).json();
 });

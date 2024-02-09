@@ -64,6 +64,9 @@ devDependencies:
   readline-sync:
     specifier: ^1.4.10
     version: 1.4.10
+  sweetalert2:
+    specifier: ^11.10.5
+    version: 11.10.5
   tsx:
     specifier: ^4.7.0
     version: 4.7.0
@@ -6916,6 +6919,10 @@ packages:
       css-what: 6.1.0
       csso: 5.0.5
       picocolors: 1.0.0
+    dev: true
+
+  /sweetalert2@11.10.5:
+    resolution: { integrity: sha512-q9eE3EKhMcpIDU/Xcz7z5lk8axCGkgxwK47gXGrrfncnBJWxHPPHnBVAjfsVXcTt8Yi8U6HNEcBRSu+qGeyFdA== }
     dev: true
 
   /system-architecture@0.1.0:

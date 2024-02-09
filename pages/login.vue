@@ -1,17 +1,67 @@
 <script setup lang="ts">
-const currentUser = useCurrentUser();
+import { login } from "~/utils/api-wrapper";
 
+const { $swal } = useNuxtApp();
+const currentUser = useCurrentUser();
+const token = useCookie("token");
 const isLoggedIn = ref(currentUser.value != null);
 
 function logout() {
-  // TODO: Implement logout function
+  isLoggedIn.value = false;
+  token.value = null;
+  currentUser.value = null;
+
+  // @ts-ignore
+  $swal.fire({
+    title: "Berhasil keluar",
+    icon: "success",
+    timer: 2000,
+    timerProgressBar: true,
+    showConfirmButton: true,
+  });
 }
 
 function submit() {
   const email = (document.getElementById("email") as HTMLInputElement).value;
   const password = (document.getElementById("password") as HTMLInputElement).value;
 
-  // TODO: Implement login function
+  // @ts-ignore
+  $swal.fire({
+    title: "Memproses...",
+    showConfirmButton: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      // @ts-ignore
+      $swal.showLoading();
+    },
+  });
+
+  login(email, password).then((res) => {
+    token.value = res.token;
+    currentUser.value = res.user;
+    isLoggedIn.value = true;
+
+    // @ts-ignore
+    $swal.fire({
+      title: "Login berhasil",
+      icon: "success",
+      timer: 2000,
+      timerProgressBar: true,
+      showConfirmButton: true,
+    });
+  }).catch((err) => {
+    console.error(err);
+
+    // @ts-ignore
+    $swal.fire({
+      title: "Login gagal",
+      text: "Email atau kata sandi salah",
+      icon: "error",
+      timer: 2000,
+      timerProgressBar: true,
+      showConfirmButton: true,
+    });
+  });
 }
 </script>
 

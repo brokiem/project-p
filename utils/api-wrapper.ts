@@ -19,27 +19,14 @@ export interface SuccessResult<T> extends Result {
 
 function makeRequest<T>(url: string, options: RequestInit): Promise<T> {
     return new Promise<T>(async (resolve, reject) => {
-        try {
-            const { data } = await useFetch(url, {
-                onRequest(c) {
-                    c.options = options;
-                },
-            });
+        const response = await fetch(url, options);
+        const result = await response.json() as Result;
 
-            const result = data.value as Result;
-
-            if (result.success) {
-                const successResult = result as SuccessResult<T>;
-                resolve(successResult.message);
-            } else {
-                const errorResult = result as ErrorResult;
-                reject(errorResult);
-            }
-        } catch (err: any) {
-            const errorResult: ErrorResult = {
-                success: false,
-                error: "Internal server error",
-            };
+        if (result.success) {
+            const successResult = result as SuccessResult<T>;
+            resolve(successResult.message);
+        } else {
+            const errorResult = result as ErrorResult;
             reject(errorResult);
         }
     });

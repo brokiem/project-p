@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { User } from "~/utils/user";
+import type { User } from "~/utils/user";
 import { successResponse, unauthorizedResponse } from "~/utils/response-helper";
 
 export default defineEventHandler(async (event) => {

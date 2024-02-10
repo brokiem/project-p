@@ -1,31 +1,26 @@
 import jwt from "jsonwebtoken";
 import { User } from "~/utils/user";
+import { successResponse, unauthorizedResponse } from "~/utils/response-helper";
 
 export default defineEventHandler(async (event) => {
-    const authorization = event.headers.get("authorization") || "";
-    const token = authorization.split(" ")[1];
-
-    const { jwtSecretKey } = useRuntimeConfig();
-
     try {
-        const decoded = jwt.verify(token, jwtSecretKey) as User;
+        const authorization = event.headers.get("authorization") || "";
+        const token = authorization.split(" ")[1];
+        const { jwtSecretKey } = useRuntimeConfig();
 
-        return new Response(JSON.stringify({
-            success: true,
-            message: {
-                user: {
-                    uuid: decoded.uuid,
-                    username: decoded.username,
-                    email: decoded.email,
-                    permissions: decoded.permissions,
-                    roles: decoded.roles,
-                },
+        // Verify the token, if it's invalid, it will throw an error
+        // So this is always safe to use
+        const decoded = jwt.verify(token, jwtSecretKey) as User;
+        return successResponse({
+            user: {
+                uuid: decoded.uuid,
+                username: decoded.username,
+                email: decoded.email,
+                permissions: decoded.permissions,
+                roles: decoded.roles,
             },
-        })).json();
+        });
     } catch (err) {
-        return new Response(JSON.stringify({
-            success: false,
-            error: "Token is invalid",
-        }), { status: 401 }).json();
+        return unauthorizedResponse("Invalid token");
     }
 });

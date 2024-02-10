@@ -1,6 +1,7 @@
 import { prisma } from "~/prisma/db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { errorResponse, notFoundResponse, successResponse, unauthorizedResponse } from "~/utils/response-helper";
 
 export default defineEventHandler(async (event) => {
     try {
@@ -8,37 +9,18 @@ export default defineEventHandler(async (event) => {
 
         const user = await prisma.users_credentials.findFirst({
             where: { email },
-            include: {
-                user_profiles: true,
-            },
+            include: { user_profiles: true },
         });
 
-        if (!user) {
-            return new Response(JSON.stringify({
-                success: false,
-                error: "User not found",
-            }), { status: 404 }).json();
-        }
+        if (!user) return notFoundResponse("User not found");
 
         const userProfile = user.user_profiles.length > 0 ? user.user_profiles[0] : null;
+        // Return 500 here because the user attributes should always exist
+        if (!userProfile) return errorResponse("User profile not found");
 
-        if (!userProfile) {
-            // Return 500 here because the user attributes should always exist
-            return new Response(JSON.stringify({
-                success: false,
-                error: "User attributes not found",
-            }), { status: 500 }).json();
-        }
-
-        // Check if the password is valid using bcrypt
         const isPasswordValid = await bcrypt.compare(password, user.password_hash);
-
-        if (!isPasswordValid) {
-            return new Response(JSON.stringify({
-                success: false,
-                error: "Invalid password",
-            }), { status: 401 }).json();
-        }
+        // Check if the password is valid
+        if (!isPasswordValid) return unauthorizedResponse("Invalid password");
 
         const { user_uuid, username, permissions, roles } = userProfile;
         const { jwtSecretKey } = useRuntimeConfig();
@@ -48,23 +30,11 @@ export default defineEventHandler(async (event) => {
             expiresIn: "7d", // expires in 7 days
         });
 
-        return new Response(JSON.stringify({
-            success: true,
-            message: {
-                token,
-                user: {
-                    user_uuid,
-                    username,
-                    email,
-                    permissions,
-                    roles,
-                },
-            },
-        })).json();
+        return successResponse({
+            token,
+            user: { user_uuid, username, email, permissions, roles },
+        });
     } catch (err) {
-        return new Response(JSON.stringify({
-            success: false,
-            error: "Internal server error",
-        }), { status: 500 }).json();
+        return errorResponse("Failed to login");
     }
 });

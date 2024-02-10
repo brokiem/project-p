@@ -1,17 +1,11 @@
 import { prisma } from "~/prisma/db";
+import { errorResponse, successResponse } from "~/utils/response-helper";
 
 export default defineEventHandler(async (event) => {
     try {
         const competencies = await prisma.competencies.findMany();
-
-        return new Response(JSON.stringify({
-            success: true,
-            message: { competencies },
-        })).json();
+        return successResponse({ competencies });
     } catch (err) {
-        return new Response(JSON.stringify({
-            success: false,
-            error: "Failed to fetch competencies",
-        }), { status: 500 }).json();
+        return errorResponse("Failed to fetch competencies");
     }
 });

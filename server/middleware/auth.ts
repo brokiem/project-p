@@ -2,18 +2,17 @@ import jwt from "jsonwebtoken";
 import { User } from "~/utils/user";
 
 export default defineEventHandler((event) => {
-    const authorization = event.headers.get("authorization") || "";
-    const token = authorization.split(" ")[1];
-
-    if (!token) {
-        event.context.isAuthenticated = false;
-        event.context.user = null;
-        return;
-    }
-
-    const { jwtSecretKey } = useRuntimeConfig();
-
     try {
+        const authorization = event.headers.get("authorization") || "";
+        const token = authorization.split(" ")[1];
+
+        if (!token) {
+            event.context.isAuthenticated = false;
+            event.context.user = null;
+            return;
+        }
+
+        const { jwtSecretKey } = useRuntimeConfig();
         const decoded = jwt.verify(token, jwtSecretKey) as User;
 
         event.context.isAuthenticated = true;

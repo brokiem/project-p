@@ -5,8 +5,11 @@ import jwt from "jsonwebtoken";
 export default defineEventHandler(async (event) => {
     const { email, password } = await readBody(event);
 
-    const user = await prisma.users.findFirst({
+    const user = await prisma.users_credentials.findFirst({
         where: { email },
+        include: {
+            user_profiles: true,
+        },
     });
 
     if (!user) {
@@ -16,11 +19,9 @@ export default defineEventHandler(async (event) => {
         }), { status: 404 }).json();
     }
 
-    const userAttributes = await prisma.user_attributes.findFirst({
-        where: { user_uuid: user.uuid },
-    });
+    const userProfile = user.user_profiles.length > 0 ? user.user_profiles[0] : null;
 
-    if (!userAttributes) {
+    if (!userProfile) {
         // Return 500 here because the user attributes should always exist
         return new Response(JSON.stringify({
             success: false,
@@ -38,11 +39,10 @@ export default defineEventHandler(async (event) => {
         }), { status: 401 }).json();
     }
 
-    const { uuid, username } = user;
+    const { user_uuid, username, permissions, roles } = userProfile;
     const { jwtSecretKey } = useRuntimeConfig();
-    const { permissions, roles } = userAttributes;
 
-    const token = jwt.sign({ uuid, username, email, permissions, roles }, jwtSecretKey!, {
+    const token = jwt.sign({ user_uuid, username, email, permissions, roles }, jwtSecretKey!, {
         algorithm: "HS384",
         expiresIn: "7d", // expires in 7 days
     });
@@ -52,7 +52,7 @@ export default defineEventHandler(async (event) => {
         message: {
             token,
             user: {
-                uuid,
+                user_uuid,
                 username,
                 email,
                 permissions,

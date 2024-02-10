@@ -5,23 +5,22 @@ import { Roles } from "~/utils/roles";
 const prisma = new PrismaClient();
 
 async function main() {
-    const admin = await prisma.users.upsert({
+    const admin = await prisma.users_credentials.upsert({
         where: { uuid: "b600a28a-0c1d-4b28-9f38-9d49ca07e9b6" },
         update: {},
         create: {
             uuid: "b600a28a-0c1d-4b28-9f38-9d49ca07e9b6",
-            username: "Admin",
             email: "admin@seed.prisma",
             password_hash: "$2b$16$VHocQGsasMgVAKhmhv4wQ.UdTwLqW3n1oLJ4ejbz1CSANNSuz9ki2",
         },
     });
 
-    await prisma.user_attributes.upsert({
-        where: { id: 1 },
+    await prisma.user_profiles.upsert({
+        where: { user_uuid: admin.uuid },
         update: {},
         create: {
-            id: 1,
             user_uuid: admin.uuid,
+            username: "Admin",
             permissions: Permissions.ADMINISTRATOR,
             roles: Roles.ADMIN,
         },

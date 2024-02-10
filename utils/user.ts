@@ -3,11 +3,11 @@ import type { Permissions } from "~/utils/permissions";
 
 export interface PartialUser {
     uuid: string;
-    username: string;
     email: string;
 }
 
 export interface User extends PartialUser {
+    username: string;
     permissions: Permissions;
     roles: Roles;
 }

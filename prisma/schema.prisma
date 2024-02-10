@@ -41,9 +41,9 @@ model extracurriculars {
 }
 
 model users_credentials {
-  uuid          String         @id @db.VarChar(36)
-  email         String         @db.VarChar(320)
-  password_hash String         @db.VarChar(60)
+  uuid          String @id @db.VarChar(36)
+  email         String @db.VarChar(320)
+  password_hash String @db.VarChar(60)
   user_profiles user_profiles[]
 }
 
@@ -54,11 +54,11 @@ model competencies {
 }
 
 model user_profiles {
-  user_uuid               String                   @unique @db.VarChar(36)
-  username                String                   @db.VarChar(64)
+  user_uuid String            @unique @db.VarChar(36)
+  username  String            @db.VarChar(64)
   permissions             Int
   roles                   Int
-  users                   users_credentials        @relation(fields: [user_uuid], references: [uuid], onUpdate: Restrict, map: "user_attributes_ibfk_1")
+  users     users_credentials @relation(fields: [user_uuid], references: [uuid], onUpdate: Restrict, map: "user_attributes_ibfk_1")
   articles                articles[]
   extracurricular_mentors extracurricular_mentors[]
 

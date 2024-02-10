@@ -26,6 +26,27 @@ async function main() {
         },
     });
 
+    const admin2 = await prisma.users_credentials.upsert({
+        where: { uuid: "c4316f9e-1032-4f02-b63a-0f3b6c64e335" },
+        update: {},
+        create: {
+            uuid: "c4316f9e-1032-4f02-b63a-0f3b6c64e335",
+            email: "admin2@seed.prisma",
+            password_hash: "$2b$16$VHocQGsasMgVAKhmhv4wQ.UdTwLqW3n1oLJ4ejbz1CSANNSuz9ki2",
+        },
+    });
+
+    await prisma.user_profiles.upsert({
+        where: { user_uuid: admin2.uuid },
+        update: {},
+        create: {
+            user_uuid: admin2.uuid,
+            username: "Admin",
+            permissions: Permissions.ADMINISTRATOR,
+            roles: Roles.ADMIN,
+        },
+    });
+
     await prisma.articles.upsert({
         where: { id: 1 },
         update: {},

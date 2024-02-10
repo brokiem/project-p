@@ -113,3 +113,60 @@ export async function deleteCompetency(id: number, token: string) {
         },
     });
 }
+
+/**
+ * Fetch all extracurriculars
+ */
+export async function fetchExtracurriculars() {
+    return makeRequest<{ extracurriculars: { id: number; title: string; description: string; extracurricular_mentors: { id: number; users: User; }[]; }[] }>(`${API_ROUTE}/extracurriculars`, {
+        method: "GET",
+    });
+}
+
+/**
+ * Create a new extracurricular
+ */
+export async function createExtracurricular(title: string, description: string, mentor_uuids: string, token: string) {
+    return makeRequest<{ extracurricular: { id: number; title: string; description: string; extracurricular_mentors: { id: number; users: User; }[]; } }>(`${API_ROUTE}/extracurriculars`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            title,
+            description,
+            mentor_uuids,
+        }),
+    });
+}
+
+/**
+ * Update an extracurricular
+ */
+export async function updateExtracurricular(id: number, title: string, description: string, mentor_uuids: string, token: string) {
+    return makeRequest<{ extracurricular: { id: number; title: string; description: string; extracurricular_mentors: { id: number; users: User; }[]; } }>(`${API_ROUTE}/extracurriculars/${id}`, {
+        method: "PATCH",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            title,
+            description,
+            mentor_uuids,
+        }),
+    });
+}
+
+/**
+ * Delete an extracurricular
+ */
+export async function deleteExtracurricular(id: number, token: string) {
+    return makeRequest<{ extracurriculars: { id: number; title: string; description: string; }[] }>(`${API_ROUTE}/extracurriculars/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+        },
+    });
+}

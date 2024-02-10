@@ -1,25 +1,31 @@
-function unauthorizedResponse(error: string) {
-    return new Response(JSON.stringify({ success: false, error }), { status: 401 }).json();
+function createResponse(data: any, error: string | null, status: number) {
+    const responseBody = error ? { success: false, error } : { success: true, message: data };
+    return new Response(JSON.stringify(responseBody), {
+        headers: { "content-type": "application/json" },
+        status,
+    });
 }
 
-function badRequestResponse(error: string) {
-    return new Response(JSON.stringify({ success: false, error }), { status: 400 }).json();
+export function unauthorizedResponse(error: string) {
+    return createResponse(null, error, 401);
 }
 
-function forbiddenResponse(error: string) {
-    return new Response(JSON.stringify({ success: false, error }), { status: 403 }).json();
+export function badRequestResponse(error: string) {
+    return createResponse(null, error, 400);
 }
 
-function successResponse(data: any, status: number = 200) {
-    return new Response(JSON.stringify({ success: true, message: data }), { status }).json();
+export function forbiddenResponse(error: string) {
+    return createResponse(null, error, 403);
 }
 
-function errorResponse(error: string, status: number = 500) {
-    return new Response(JSON.stringify({ success: false, error }), { status }).json();
+export function successResponse(data: any, status: number = 200) {
+    return createResponse(data, null, status);
 }
 
-function notFoundResponse(error: string) {
-    return new Response(JSON.stringify({ success: false, error }), { status: 404 }).json();
+export function errorResponse(error: string, status: number = 500) {
+    return createResponse(null, error, status);
 }
 
-export { unauthorizedResponse, forbiddenResponse, successResponse, errorResponse, notFoundResponse, badRequestResponse };
+export function notFoundResponse(error: string) {
+    return createResponse(null, error, 404);
+}

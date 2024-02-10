@@ -72,15 +72,25 @@ async function main() {
         });
     }
 
-    await prisma.competencies.upsert({
-       where: { id: 1 },
-       update: {},
-       create: {
-           id: 1,
-           title: "Rekayasa Perangkat Lunak",
-           description: "Biasa disebut RPL, sebuah jurusan yang mempelajari dan mendalami pengembangn perangkat lunak mulai dari pembuatan website, aplikasi, game dan semua yang berkaitan dengan pemrograman."
-       }
-    });
+    const competencies: {
+        title: string,
+        description: string
+    }[] = JSON.parse(`[{"title":"Rekayasa Perangkat Lunak","description":"Biasa disebut RPL, sebuah jurusan yang mempelajari dan mendalami pengembangn perangkat lunak mulai dari pembuatan website, aplikasi, game dan semua yang berkaitan dengan pemrograman."},{"title":"Desain Komunikasi Visual","description":"Jurusan DKV merupakan suatu jurusan yang mempelajari tentang penggunaan komputer guna untuk menyajikan data teks, suara, gambar, animasi, serta video yang dibuat semenarik mungkin."},{"title":"Tata Boga","description":"Kompetensi Keahlian Kuliner memberikan pengetahuan dan keterampilan kepada peserta didik di bidang pengolahan, penyajian dan pelayanan makanan dan minuman."},{"title":"Akuntansi dan Keuangan Lembaga","description":"Kompetensi Keahlian ini membekali peserta dengan keterampilan akuntansi, pengelolaan keuangan, dan perpajakan, baik secara manual maupun komputerisasi."}]`);
+
+    for (let i = 0; i < competencies.length; i++) {
+        const competency = competencies[i];
+        const id = i + 1;
+
+        await prisma.competencies.upsert({
+            where: { id },
+            update: {},
+            create: {
+                id,
+                title: competency.title,
+                description: competency.description,
+            },
+        });
+    }
 
     console.log("Seeding done!");
 }

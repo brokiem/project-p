@@ -8,6 +8,8 @@ useHead({
     },
   ],
 });
+
+const { competencies } = await fetchCompetencies();
 </script>
 
 <template>
@@ -49,43 +51,17 @@ useHead({
           <!-- Section title -->
           <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
             <h2 class="mb-4 text-3xl tracking-tight font-medium text-gray-900 dark:text-white">Kompetensi Keahlian</h2>
-            <p class="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">SMKN 2 Tabanan memiliki 4 Kompetensi
+            <p class="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">SMKN 2 Tabanan memiliki {{ competencies.length }} Kompetensi
               Keahlian yang tersedia, antara lain</p>
           </div>
 
           <!-- Kompetensi grid -->
           <div class="space-y-3 lg:grid lg:grid-cols-4 sm:gap-4 lg:gap-3 lg:space-y-0">
-            <!-- RPL -->
             <div
+                v-for="competency in competencies"
                 class="flex flex-col p-4 mx-auto md:max-w-3xl text-center text-gray-900 bg-white rounded-md border border-gray-200 shadow md:pt-8 transition duration-200">
-              <h3 class="mb-4 text-2xl font-normal tracking-tight">Rekayasa Perangkat Lunak</h3>
-              <p class="font-light text-gray-500 sm:text-lg text-justify">Biasa disebut RPL, sebuah jurusan yang
-                mempelajari dan mendalami pengembangn perangkat lunak mulai dari pembuatan website, aplikasi, game dan
-                semua yang berkaitan dengan pemrograman.</p>
-            </div>
-            <!-- DKV -->
-            <div
-                class="flex flex-col p-4 mx-auto md:max-w-3xl text-center text-gray-900 bg-white rounded-md border border-gray-200 shadow md:pt-8 transition duration-200">
-              <h3 class="mb-4 text-2xl font-normal tracking-tight">Desain Komunikasi Visual</h3>
-              <p class="font-light text-gray-500 sm:text-lg text-justify">Jurusan DKV merupakan suatu jurusan yang
-                mempelajari tentang penggunaan komputer guna untuk menyajikan data teks, suara, gambar, animasi, serta
-                video yang dibuat semenarik mungkin.</p>
-            </div>
-            <!-- TB -->
-            <div
-                class="flex flex-col p-4 mx-auto md:max-w-3xl text-center text-gray-900 bg-white rounded-md border border-gray-200 shadow md:pt-8 transition duration-200">
-              <h3 class="mb-4 text-2xl font-normal tracking-tight">Tata Boga</h3>
-              <p class="font-light text-gray-500 sm:text-lg text-justify">Kompetensi Keahlian Kuliner memberikan
-                pengetahuan dan keterampilan kepada peserta didik di bidang pengolahan, penyajian dan pelayanan makanan
-                dan minuman.</p>
-            </div>
-            <!-- AKL -->
-            <div
-                class="flex flex-col p-4 mx-auto md:max-w-3xl text-center text-gray-900 bg-white rounded-md border border-gray-200 shadow md:pt-8 transition duration-200">
-              <h3 class="mb-4 text-2xl font-normal tracking-tight">Akuntansi dan Keuangan Lembaga</h3>
-              <p class="font-light text-gray-500 sm:text-lg text-justify">Kompetensi Keahlian ini membekali peserta
-                dengan keterampilan akuntansi, pengelolaan keuangan, dan perpajakan, baik secara manual maupun
-                komputerisasi.</p>
+              <h3 class="mb-4 text-2xl font-normal tracking-tight">{{ competency.title }}</h3>
+              <p class="font-light text-gray-500 sm:text-lg text-justify">{{ competency.description }}</p>
             </div>
           </div>
         </div>

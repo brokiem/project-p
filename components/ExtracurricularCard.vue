@@ -34,7 +34,7 @@
         <div class="p-6 space-y-6">
           <!-- Using <whitespace-pre> here because it preserve whitespace like newline characters (\n) -->
           <p class="whitespace-pre text-base leading-relaxed text-gray-500 dark:text-gray-400 text-center">{{
-              pembimbing
+              mentors.map((mentor) => `${mentor.users.username}`).join("\n")
             }}</p>
         </div>
         <!-- Modal footer -->
@@ -64,8 +64,8 @@ export default {
       type: String,
       required: true,
     },
-    pembimbing: {
-      type: String,
+    mentors: {
+      type: Array,
       required: true,
     },
   },

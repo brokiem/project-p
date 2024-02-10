@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import EkstrakulikulerCard from "~/components/EkstrakurikulerCard.vue";
-import ekstrakurikuler from "~/assets/ekstrakulikuler.json";
+import { fetchExtracurriculars } from "~/utils/api-wrapper";
 
 useHead({
   title: "Kesiswaan - SMK Negeri 2 Tabanan",
@@ -11,6 +10,8 @@ useHead({
     },
   ],
 });
+
+const { extracurriculars } = await fetchExtracurriculars();
 </script>
 
 <template>
@@ -21,13 +22,13 @@ useHead({
     <div class="container mx-auto py-10">
       <div class="px-4 mx-auto md:max-w-screen-xl lg:px-6">
         <div class="space-y-3 lg:grid lg:grid-cols-3 gap-4 lg:gap-5 lg:space-y-0">
-          <EkstrakulikulerCard
-              v-for="{ title, description, pembimbing } in ekstrakurikuler"
+          <ExtracurricularCard
+              v-for="{ title, description, extracurricular_mentors } in extracurriculars"
 
               :title="title"
               :description="description"
-              :pembimbing="pembimbing"
-          ></EkstrakulikulerCard>
+              :mentors="extracurricular_mentors"
+          ></ExtracurricularCard>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ model articles {
   updated_at  DateTime?     @db.DateTime(0)
   type        articles_type
   flags       Int?
-  users user_profiles @relation(fields: [author_uuid], references: [user_uuid], onUpdate: Restrict, map: "articles_ibfk_1")
+  users       user_profiles @relation(fields: [author_uuid], references: [user_uuid], onUpdate: Restrict, map: "articles_ibfk_1")
 
   @@index([author_uuid], map: "author_uuid")
 }
@@ -27,7 +27,7 @@ model extracurricular_mentors {
   mentor_uuid        String           @db.VarChar(36)
   extracurricular_id Int
   extracurriculars   extracurriculars @relation(fields: [extracurricular_id], references: [id], onUpdate: Restrict, map: "extracurricular_mentors_ibfk_1")
-  users user_profiles @relation(fields: [mentor_uuid], references: [user_uuid], onUpdate: Restrict, map: "extracurricular_mentors_ibfk_2")
+  users              user_profiles    @relation(fields: [mentor_uuid], references: [user_uuid], onUpdate: Restrict, map: "extracurricular_mentors_ibfk_2")
 
   @@index([extracurricular_id], map: "extracurricular_id")
   @@index([mentor_uuid], map: "mentor_uuid")
@@ -41,9 +41,9 @@ model extracurriculars {
 }
 
 model users_credentials {
-  uuid          String @id @db.VarChar(36)
-  email         String @db.VarChar(320)
-  password_hash String @db.VarChar(60)
+  uuid          String          @id @db.VarChar(36)
+  email         String          @unique @db.VarChar(320)
+  password_hash String          @db.VarChar(60)
   user_profiles user_profiles[]
 }
 
@@ -54,11 +54,11 @@ model competencies {
 }
 
 model user_profiles {
-  user_uuid String            @unique @db.VarChar(36)
-  username  String            @db.VarChar(64)
+  user_uuid               String                    @unique @db.VarChar(36)
+  username                String                    @db.VarChar(64)
   permissions             Int
   roles                   Int
-  users     users_credentials @relation(fields: [user_uuid], references: [uuid], onUpdate: Restrict, map: "user_attributes_ibfk_1")
+  users                   users_credentials         @relation(fields: [user_uuid], references: [uuid], onUpdate: Restrict, map: "user_attributes_ibfk_1")
   articles                articles[]
   extracurricular_mentors extracurricular_mentors[]
 

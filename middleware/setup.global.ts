@@ -1,4 +1,5 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
+    const { $api } = useNuxtApp();
     const currentUser = useCurrentUser();
     const token = useCookie("token");
 
@@ -9,8 +10,8 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if (!!token.value) {
         try {
             // Verify the token and set the current user
-            const res = await verify(token.value);
-            currentUser.value = res.user;
+            const { message } = await $api.auth.verify(token.value);
+            currentUser.value = message.user;
         } catch (err) {
             console.error(err);
         }

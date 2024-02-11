@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { login } from "~/utils/api-wrapper";
-
-const { $swal } = useNuxtApp();
+const { $swal, $api } = useNuxtApp();
 const currentUser = useCurrentUser();
 const token = useCookie("token");
 const isLoggedIn = ref(currentUser.value != null);
@@ -11,17 +9,19 @@ function logout() {
   token.value = null;
   currentUser.value = null;
 
-  // @ts-ignore
-  $swal.fire({
-    title: "Berhasil keluar",
-    icon: "success",
-    timer: 2000,
-    timerProgressBar: true,
-    showConfirmButton: true,
-  });
+  setTimeout(() => {
+    // @ts-ignore
+    $swal.fire({
+      title: "Berhasil keluar",
+      icon: "success",
+      timer: 2000,
+      timerProgressBar: true,
+      showConfirmButton: true,
+    });
+  }, 500);
 }
 
-function submit() {
+async function submit() {
   const email = (document.getElementById("email") as HTMLInputElement).value;
   const password = (document.getElementById("password") as HTMLInputElement).value;
 
@@ -36,9 +36,11 @@ function submit() {
     },
   });
 
-  login(email, password).then((res) => {
-    token.value = res.token;
-    currentUser.value = res.user;
+  try {
+    const { message } = await $api.auth.login(email, password);
+
+    token.value = message.token;
+    currentUser.value = message.user;
     isLoggedIn.value = true;
 
     // @ts-ignore
@@ -49,7 +51,7 @@ function submit() {
       timerProgressBar: true,
       showConfirmButton: true,
     });
-  }).catch((err) => {
+  } catch (err) {
     console.error(err);
 
     // @ts-ignore
@@ -61,7 +63,7 @@ function submit() {
       timerProgressBar: true,
       showConfirmButton: true,
     });
-  });
+  }
 }
 </script>
 

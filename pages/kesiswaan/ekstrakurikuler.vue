@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { fetchExtracurriculars } from "~/utils/api-wrapper";
+import type { User } from "~/utils/user";
 
 useHead({
   title: "Kesiswaan - SMK Negeri 2 Tabanan",
@@ -11,7 +11,20 @@ useHead({
   ],
 });
 
-const { extracurriculars } = await fetchExtracurriculars();
+const extracurriculars: Ref<{ id: number; title: string; description: string; extracurricular_mentors: { id: number; users: User; }[]; }[]> = ref([]);
+
+async function loadExtracurriculars() {
+  const { $api } = useNuxtApp();
+  const { message } = await $api.extracurriculars.get();
+
+  extracurriculars.value = message.extracurriculars;
+}
+
+try {
+  await loadExtracurriculars();
+} catch (err) {
+  console.error(err);
+}
 </script>
 
 <template>

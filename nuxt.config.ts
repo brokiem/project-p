@@ -18,6 +18,9 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         jwtSecretKey: process.env.JWT_SECRET_KEY,
+        public: {
+            apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
+        },
     },
     devtools: { enabled: false },
     modules: [

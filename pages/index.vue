@@ -9,7 +9,20 @@ useHead({
   ],
 });
 
-const { competencies } = await fetchCompetencies();
+const competencies: Ref<{ id: number, title: string, description: string }[]> = ref([]);
+
+async function loadCompetencies() {
+  const { $api } = useNuxtApp();
+  const { message } = await $api.competencies.get();
+
+  competencies.value = message.competencies;
+}
+
+try {
+  await loadCompetencies();
+} catch (err) {
+  console.error(err);
+}
 </script>
 
 <template>

@@ -11,7 +11,7 @@ async function main() {
         create: {
             uuid: "b600a28a-0c1d-4b28-9f38-9d49ca07e9b6",
             email: "admin@seed.prisma",
-            password_hash: "$2b$16$VHocQGsasMgVAKhmhv4wQ.UdTwLqW3n1oLJ4ejbz1CSANNSuz9ki2",
+            password_hash: "$2b$14$IxRy14tFysTMNjtY8ofq5OFfrsK1KKsIc4kGDWPP2fi26heIsOdfS",
         },
     });
 
@@ -32,7 +32,7 @@ async function main() {
         create: {
             uuid: "c4316f9e-1032-4f02-b63a-0f3b6c64e335",
             email: "admin2@seed.prisma",
-            password_hash: "$2b$16$VHocQGsasMgVAKhmhv4wQ.UdTwLqW3n1oLJ4ejbz1CSANNSuz9ki2",
+            password_hash: "$2b$14$M5DWnJPeed.Msj/Vz0.OYeH.R/93EYT6gfKA9RS.3yKFD9fTGsmWO",
         },
     });
 

@@ -38,7 +38,7 @@ const generateAccount = async () => {
     console.log("> Generating password hash...");
 
     // hash password
-    bcrypt.genSalt(16, function (err, salt) {
+    bcrypt.genSalt(14, function (err, salt) {
         if (err) return console.log("Error: Failed to create salt");
 
         bcrypt.hash(rawPass, salt, function (err, hash) {

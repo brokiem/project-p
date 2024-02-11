@@ -1,5 +1,3 @@
-import type { user_attributes as UserAttributes } from "@prisma/client";
-
 export enum Roles {
     // Kepala sekolah
     HEADMASTER = 1 << 0,
@@ -24,6 +22,6 @@ export enum Roles {
 }
 
 // Check if a user has a role
-export const hasRole = (userAttributes: UserAttributes, role: Roles) => {
-    return (userAttributes.roles & role) === role;
+export const hasRole = (userRoles: Roles, role: Roles) => {
+    return (userRoles & role) === role;
 };

@@ -25,14 +25,14 @@ export default defineEventHandler(async (event) => {
         const { user_uuid, username, permissions, roles } = userProfile;
         const { jwtSecretKey } = useRuntimeConfig();
 
-        const token = jwt.sign({ user_uuid, username, email, permissions, roles }, jwtSecretKey!, {
+        const token = jwt.sign({ uuid: user_uuid, username, email, permissions, roles }, jwtSecretKey!, {
             algorithm: "HS384",
             expiresIn: "7d", // expires in 7 days
         });
 
         return successResponse({
             token,
-            user: { user_uuid, username, email, permissions, roles },
+            user: { uuid: user_uuid, username, email, permissions, roles },
         });
     } catch (err) {
         return errorResponse("Failed to login");

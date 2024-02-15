@@ -1,6 +1,7 @@
 import { articles_type as ArticleType, PrismaClient } from "@prisma/client";
 import { Permissions } from "~/utils/permissions";
 import { Roles } from "~/utils/roles";
+import { ArticleFlags } from "~/utils/articles";
 
 const prisma = new PrismaClient();
 
@@ -63,6 +64,7 @@ async function main() {
                             title: "This is a news title!",
                             content: "This is a news article!",
                             type: ArticleType.NEWS,
+                            flags: ArticleFlags.IS_PUBLISHED,
                         },
                     },
                     extracurricular_mentors: {
@@ -93,6 +95,7 @@ async function main() {
                             title: "This is an announcement title!",
                             content: "This is an announcement article!",
                             type: ArticleType.ANNOUNCEMENT,
+                            flags: ArticleFlags.IS_PUBLISHED,
                         },
                     },
                     extracurricular_mentors: {

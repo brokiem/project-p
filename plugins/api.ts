@@ -1,11 +1,13 @@
 import CompetenciesModule from "~/repository/modules/competencies";
 import ExtracurricularsModule from "~/repository/modules/extracurriculars";
 import AuthModule from "~/repository/modules/auth";
+import ArticlesModule from "~/repository/modules/articles";
 
 interface IApiInstance {
     competencies: CompetenciesModule;
     extracurriculars: ExtracurricularsModule;
     auth: AuthModule;
+    articles: ArticlesModule;
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -15,9 +17,10 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
 
     const modules: IApiInstance = {
-        competencies: new CompetenciesModule(apiBaseUrl as string),
-        extracurriculars: new ExtracurricularsModule(apiBaseUrl as string),
-        auth: new AuthModule(apiBaseUrl as string),
+        competencies: new CompetenciesModule(apiBaseUrl),
+        extracurriculars: new ExtracurricularsModule(apiBaseUrl),
+        auth: new AuthModule(apiBaseUrl),
+        articles: new ArticlesModule(apiBaseUrl),
     };
 
     return {

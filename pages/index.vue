@@ -80,6 +80,37 @@ try {
         </div>
       </div>
     </div>
+
+    <!-- Article section -->
+    <section id="artikel" class="bg-white dark:bg-gray-900">
+      <div class="container mx-auto">
+        <div class="py-8 px-4 mx-auto md:max-w-screen-xl lg:py-16 lg:px-6">
+          <!-- Section title -->
+          <div class="max-w-screen-xl mb-8 lg:mb-10">
+            <h2 class="mb-4 text-3xl tracking-tight font-medium text-gray-900 dark:text-white">
+              Pengumuman & Berita
+            </h2>
+          </div>
+
+          <!-- Articles -->
+          <ArticlesContainer :display-announcements="true" :display-news="true" class="mb-5"/>
+
+          <!-- Button -->
+          <NuxtLink href="/artikel/pengumuman">
+            <button type="button"
+                    class="shadow font-base transition duration-200 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-2 focus:ring-gray-200 rounded-lg text-sm px-4 py-2 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+              LIHAT PENGUMUMAN LAINNYA
+            </button>
+          </NuxtLink>
+          <NuxtLink href="/artikel/berita">
+            <button type="button"
+                    class="shadow font-base transition duration-200 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-2 focus:ring-gray-200 rounded-lg text-sm px-4 py-2 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+              LIHAT BERITA LAINNYA
+            </button>
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 

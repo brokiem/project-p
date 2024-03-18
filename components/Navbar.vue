@@ -1,14 +1,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import { initFlowbite } from "flowbite";
 import { Bars3Icon, ChevronDownIcon } from "@heroicons/vue/20/solid";
 
 export default defineComponent({
   name: "Navbar",
   components: { ChevronDownIcon, Bars3Icon },
-  mounted() {
-    initFlowbite();
-  },
 });
 </script>
 

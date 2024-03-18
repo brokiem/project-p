@@ -1,18 +1,13 @@
-import jwt from "jsonwebtoken";
-import type { User } from "~/utils/user";
-
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware(async (to, from) => {
+    const { $api } = useNuxtApp();
     const currentUser = useCurrentUser();
 
-    const authorization = useRequestHeader('authorization');
-    if (!authorization) return navigateTo("/login");
-
-    const token = authorization.split(" ")[1];
-    const { jwtSecretKey } = useRuntimeConfig();
+    const token = useCookie("token");
+    if (!token) return navigateTo("/login");
 
     try {
-        const payload = jwt.verify(token, jwtSecretKey!, { algorithms: ["HS384"] });
-        const { uuid, username, email, permissions, roles } = payload as User;
+        const { message } = await $api.auth.verify(token.value!);
+        const { uuid, username, email, permissions, roles } = message.user;
 
         currentUser.value = { uuid, username, email, permissions, roles };
     } catch (error) {

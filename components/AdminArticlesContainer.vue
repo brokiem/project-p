@@ -2,7 +2,7 @@
 import ArticleCardSkeleton from "~/components/skeletons/ArticleCardSkeleton.vue";
 
 export default defineComponent({
-  name: "ArticlesContainer",
+  name: "AdminArticlesContainer",
   components: {ArticleCardSkeleton},
   props: {
     displayNews: {
@@ -147,7 +147,7 @@ export default defineComponent({
       <ArticleCardSkeleton v-for="i in numberOfNewsToDisplay" v-if="displayNews && isLoading" :key="i"/>
 
       <!-- Announcements -->
-      <ArticleCard
+      <AdminArticleCard
           v-for="article in announcements"
           v-if="displayAnnouncements && !isLoading"
 
@@ -155,17 +155,17 @@ export default defineComponent({
           :key="article.id"
           :article-type="article.type"
           :author-uuid="article.author_uuid"
-          :summary="article.summary"
           :content="article.content"
           :created-at="article.created_at"
           :flags="article.flags"
           :image-url="article.image_url"
+          :summary="article.summary"
           :title="article.title"
           :updated-at="article.updated_at"
       />
 
       <!-- News -->
-      <ArticleCard
+      <AdminArticleCard
           v-for="article in news"
           v-if="displayNews && !isLoading"
 
@@ -173,11 +173,11 @@ export default defineComponent({
           :key="article.id"
           :article-type="article.type"
           :author-uuid="article.author_uuid"
-          :summary="article.summary"
           :content="article.content"
           :created-at="article.created_at"
           :flags="article.flags"
           :image-url="article.image_url"
+          :summary="article.summary"
           :title="article.title"
           :updated-at="article.updated_at"
       />

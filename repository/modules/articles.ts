@@ -1,5 +1,19 @@
+import type { Prisma } from "@prisma/client";
 import HttpFactory from "~/repository/factory";
-import { ArticleFlags, type ArticleType } from "~/utils/articles";
+import { ArticleFlags, type ArticleType as TheArticleType } from "~/utils/articles";
+
+export type ArticleType = {
+    id: number;
+    image_url: string;
+    title: string;
+    summary: string;
+    content: Prisma.JsonValue;
+    author_uuid: string;
+    created_at: string;
+    updated_at: string;
+    type: TheArticleType;
+    flags: ArticleFlags;
+};
 
 class ArticlesModule extends HttpFactory {
     private readonly ROUTE = `${this.API_URL}/articles`;
@@ -21,17 +35,7 @@ class ArticlesModule extends HttpFactory {
 
     async getAnnouncementById(id: number, token?: string): Promise<{
         success: boolean; message: {
-            announcement: {
-                id: number;
-                image_url: string;
-                title: string;
-                content: string;
-                author_uuid: string;
-                created_at: string;
-                updated_at: string;
-                type: ArticleType;
-                flags: ArticleFlags;
-            }
+            announcement: ArticleType;
         }
     }> {
         const request: RequestInit = {
@@ -50,17 +54,7 @@ class ArticlesModule extends HttpFactory {
 
     async getAnnouncements(offset: number | null, limit: number | null, token?: string): Promise<{
         success: boolean; message: {
-            announcements: {
-                id: number;
-                image_url: string;
-                title: string;
-                content: string;
-                author_uuid: string;
-                created_at: string;
-                updated_at: string;
-                type: ArticleType;
-                flags: ArticleFlags;
-            }[]
+            announcements: ArticleType[];
         }
     }> {
         const url = new URL(`${this.ROUTE}/announcements`);
@@ -88,17 +82,7 @@ class ArticlesModule extends HttpFactory {
 
     async searchAnnouncements(query: string, token?: string): Promise<{
         success: boolean; message: {
-            announcements: {
-                id: number;
-                image_url: string;
-                title: string;
-                content: string;
-                author_uuid: string;
-                created_at: string;
-                updated_at: string;
-                type: ArticleType;
-                flags: ArticleFlags;
-            }[]
+            announcements: ArticleType[];
         }
     }> {
         const url = new URL(`${this.ROUTE}/announcements/search`);
@@ -135,17 +119,7 @@ class ArticlesModule extends HttpFactory {
 
     async getNewsById(id: number, token?: string): Promise<{
         success: boolean; message: {
-            news: {
-                id: number;
-                image_url: string;
-                title: string;
-                content: string;
-                author_uuid: string;
-                created_at: string;
-                updated_at: string;
-                type: ArticleType;
-                flags: ArticleFlags;
-            }
+            news: ArticleType;
         }
     }> {
         const request: RequestInit = {
@@ -164,17 +138,7 @@ class ArticlesModule extends HttpFactory {
 
     async getNews(offset: number | null, limit: number | null, token?: string): Promise<{
         success: boolean; message: {
-            news: {
-                id: number;
-                image_url: string;
-                title: string;
-                content: string;
-                author_uuid: string;
-                created_at: string;
-                updated_at: string;
-                type: ArticleType;
-                flags: ArticleFlags;
-            }[]
+            news: ArticleType[];
         }
     }> {
         const url = new URL(`${this.ROUTE}/news`);
@@ -202,17 +166,7 @@ class ArticlesModule extends HttpFactory {
 
     async searchNews(query: string, token?: string): Promise<{
         success: boolean; message: {
-            news: {
-                id: number;
-                image_url: string;
-                title: string;
-                content: string;
-                author_uuid: string;
-                created_at: string;
-                updated_at: string;
-                type: ArticleType;
-                flags: ArticleFlags;
-            }[]
+            news: ArticleType[];
         }
     }> {
         const url = new URL(`${this.ROUTE}/news/search`);
@@ -230,6 +184,98 @@ class ArticlesModule extends HttpFactory {
         }
 
         return this.request(url.toString(), request);
+    }
+
+    async createAnnouncement(image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, author_uuid: string, token: string): Promise<{
+        success: boolean; message: {
+            announcement: ArticleType[];
+        },
+        error: string,
+    }> {
+        return this.request(`${this.ROUTE}/announcements`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                image_url,
+                title,
+                summary,
+                content,
+                flags,
+                author_uuid,
+            }),
+        });
+    }
+
+    async createNews(image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, author_uuid: string, token: string): Promise<{
+        success: boolean; message: {
+            news: ArticleType[];
+        },
+        error: string,
+    }> {
+        return this.request(`${this.ROUTE}/news`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                image_url,
+                title,
+                summary,
+                content,
+                flags,
+                author_uuid,
+            }),
+        });
+    }
+
+    async updateAnnouncement(id: number, image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, author_uuid: string, token: string): Promise<{
+        success: boolean; message: {
+            announcement: ArticleType[];
+        },
+        error: string,
+    }> {
+        return this.request(`${this.ROUTE}/announcements/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                image_url,
+                title,
+                summary,
+                content,
+                flags,
+                author_uuid,
+            }),
+        });
+    }
+
+    async updateNews(id: number, image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, author_uuid: string, token: string): Promise<{
+        success: boolean; message: {
+            news: ArticleType[];
+        },
+        error: string,
+    }> {
+        return this.request(`${this.ROUTE}/news/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                image_url,
+                title,
+                summary,
+                content,
+                flags,
+                author_uuid,
+            }),
+        });
     }
 }
 

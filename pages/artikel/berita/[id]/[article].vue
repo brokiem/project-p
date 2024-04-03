@@ -52,7 +52,7 @@ const articleCreatedDate = formatArticleDate(news.created_at);
 
 <template>
   <div class="flex justify-center">
-    <div class="w-full max-w-[680px] my-16 px-5 md:px-0">
+    <div class="w-full max-w-[770px] my-16 px-5 md:px-0">
       <div>
         <!-- Article title -->
         <h2 class="mb-4 text-4xl font-medium text-black dark:text-white">

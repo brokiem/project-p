@@ -62,7 +62,8 @@ async function main() {
                         create: {
                             image_url: "https://source.unsplash.com/random/1366x768/?landscape",
                             title: "This is a news title!",
-                            content: "This is a news article!",
+                            summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec elit ultricies ultricies.",
+                            content: "",
                             type: ArticleType.NEWS,
                             flags: ArticleFlags.IS_PUBLISHED,
                         },
@@ -93,7 +94,8 @@ async function main() {
                         create: {
                             image_url: "https://source.unsplash.com/random/1366x768/?landscape",
                             title: "This is an announcement title!",
-                            content: "This is an announcement article!",
+                            summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec elit ultricies ultricies.",
+                            content: "",
                             type: ArticleType.ANNOUNCEMENT,
                             flags: ArticleFlags.IS_PUBLISHED,
                         },

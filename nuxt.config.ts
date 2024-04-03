@@ -18,8 +18,16 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         jwtSecretKey: process.env.JWT_SECRET_KEY,
+        imageKitPublicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+        imageKitPrivateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+        imageKitUrlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
         public: {
             apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
+        },
+    },
+    vue: {
+        compilerOptions: {
+            isCustomElement: (tag) => ["QuillEditor"].includes(tag),
         },
     },
     devtools: { enabled: false },

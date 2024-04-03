@@ -37,3 +37,7 @@ export const translateArticleType = (type: ArticleType) => {
 export const formatArticleUrl = (type: ArticleType, title: string, id: number) => {
     return `/artikel/${translateArticleType(type).toLowerCase()}/${id}/${encodeArticleTitle(title)}`;
 };
+
+export const formatArticleEditUrl = (type: ArticleType, id: number) => {
+    return `/admin/artikel/${translateArticleType(type).toLowerCase()}/${id}/edit`;
+};

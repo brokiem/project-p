@@ -25,7 +25,7 @@ useHead({
             class="block w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
           <div class="px-6 pt-6 pb-4">
             <p class="text-center font-normal text-gray-700 dark:text-gray-400">
-              Selamat datang di halaman admin. Anda dapat mengelola data-data sekolah di sini.
+              Selamat datang di halaman admin. Anda dapat mengelola data-data di sini.
             </p>
 
             <div class="pt-3 flex justify-center">

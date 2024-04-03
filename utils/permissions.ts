@@ -15,6 +15,7 @@ export enum Permissions {
     MANAGE_EXTRACURRICULAR = 1 << 7,
     CREATE_COMPETENCY = 1 << 8,
     MANAGE_COMPETENCY = 1 << 9,
+    UPLOAD_MEDIA = 1 << 10,
 }
 
 // Check if a user has a permission

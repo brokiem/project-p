@@ -24,12 +24,13 @@ export default defineEventHandler(async (event) => {
 
         if (!news) return notFoundResponse("News not found");
 
-        const { title, content, image_url, author_uuid } = await readBody(event);
+        const { title, summary, content, image_url, author_uuid } = await readBody(event);
 
         const updatedNews = await prisma.articles.update({
             where: { id: parseInt(id) },
             data: {
                 title,
+                summary,
                 content,
                 image_url,
                 author_uuid,

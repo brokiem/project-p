@@ -315,6 +315,57 @@ function uploadImage(file: File): Promise<string> {
 }
 
 const isDraft = hasFlag(announcement.value.flags!, ArticleFlags.IS_DRAFT);
+
+function deleteArticle() {
+  // @ts-ignore
+  $swal.fire({
+    title: "Hapus artikel?",
+    text: "Artikel yang dihapus tidak dapat dikembalikan.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Hapus",
+    confirmButtonColor: "#EF4444",
+    cancelButtonText: "Batal",
+  }).then(async (result: { isConfirmed: any; }) => {
+    if (result.isConfirmed) {
+      // @ts-ignore
+      $swal.fire({
+        title: "Menghapus artikel...",
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+        didOpen: () => {
+          // @ts-ignore
+          $swal.showLoading();
+        },
+      });
+
+      const token = useCookie("token");
+      const {success, error} = await $api.articles.deleteAnnouncement(announcement.value.id!, token.value!);
+
+      if (success) {
+        // @ts-ignore
+        $swal.fire({
+          title: "Berhasil",
+          text: "Artikel berhasil dihapus.",
+          icon: "success",
+          confirmButtonText: "Tutup",
+          confirmButtonColor: "#3B82F6",
+        });
+      } else {
+        // @ts-ignore
+        $swal.fire({
+          title: "Gagal",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Tutup",
+          confirmButtonColor: "#EF4444",
+        });
+      }
+    }
+  })
+}
 </script>
 
 <template>
@@ -417,7 +468,7 @@ const isDraft = hasFlag(announcement.value.flags!, ArticleFlags.IS_DRAFT);
     <button
         class="transition duration-150 mt-5 shadow-sm text-white bg-red-600 hover:bg-red-800 border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gray-200 font-medium rounded-md text-sm px-5 py-2 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
         type="button"
-        @click="">
+        @click="deleteArticle">
       Hapus Artikel
     </button>
     <!-- Draft article button -->

@@ -1,33 +1,35 @@
 <script lang="ts" setup>
 import {MagnifyingGlassIcon} from "@heroicons/vue/20/solid";
 
-definePageMeta({
-  middleware: ["verify-article-page"],
+const router = useRouter();
+const route = useRoute();
+const searchQuery = route.query.q as string;
+
+// Redirect to home if no search query
+if (!searchQuery) {
+  router.replace("/");
+}
+
+useHead({
+  title: `Mencari hasil untuk "${searchQuery}" - Pencarian SMK Negeri 2 Tabanan`,
+  meta: [
+    {
+      name: "description",
+      content: "Temukan berita dan pengumuman terbaru di SMK Negeri 2 Tabanan",
+    },
+  ],
 });
 
 const {$api} = useNuxtApp();
-const route = useRoute();
 const token = useCookie("token");
-const {message: articleCountResponse} = await $api.articles.getNewsCount(token.value!);
 
-const currentPage = parseInt(route.params.page as string);
-const articlesPerPage = 6;
-const totalArticleCount = parseInt(articleCountResponse.count);
-const {totalPaginationPages, startingArticleIndex} = await calculatePaginationData(articlesPerPage, currentPage, totalArticleCount);
+const searchValue = ref(searchQuery);
+const finalSearchValue = ref(searchQuery);
 
-if (currentPage > totalPaginationPages) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: "Halaman tidak ditemukan",
-  });
-}
-
-const searchValue = ref("");
-
-const router = useRouter();
 const searchArticle = async () => {
   if (searchValue.value) {
-    await router.push(`/admin/artikel/berita/cari?q=${searchValue.value}`);
+    await router.push(`/admin/artikel/pengumuman/cari?q=${encodeURIComponent(searchValue.value)}`);
+    finalSearchValue.value = searchValue.value;
   }
 };
 </script>
@@ -39,9 +41,9 @@ const searchArticle = async () => {
         <!-- Section title -->
         <div class="max-w-screen-xl mb-8 lg:mb-10">
           <h2 class="mb-1.5 text-3xl tracking-tight font-medium text-gray-900 dark:text-white">
-            Kelola Berita
+            Pengumuman
           </h2>
-          <h3 class="mb-3">Halaman {{ currentPage }} dari {{ totalPaginationPages }} ({{ articlesPerPage }} hasil per halaman)</h3>
+          <h3 class="mb-3">Menampilkan 20 hasil pencarian teratas untuk "{{ finalSearchValue }}"</h3>
         </div>
 
         <!-- Search input -->
@@ -58,19 +60,12 @@ const searchArticle = async () => {
           </button>
         </form>
 
-        <!-- News cards -->
+        <!-- Pengumuman cards -->
         <AdminArticlesContainer
-            :news-starting-index="startingArticleIndex"
-            :display-news="true"
-            :number-of-news-to-display="articlesPerPage"
+            :display-announcements="true"
+            :number-of-announcements-to-display="20"
+            :search-value="finalSearchValue"
             class="mb-8"
-        />
-
-        <Pagination
-            :current-page="currentPage"
-            :max-displayed-pagination-numbers="4"
-            :total-pagination-pages="totalPaginationPages"
-            pagination-base-url="/admin/artikel/berita/page"
         />
       </div>
     </div>

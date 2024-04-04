@@ -27,7 +27,7 @@ const searchValue = ref("");
 const router = useRouter();
 const searchArticle = async () => {
   if (searchValue.value) {
-    await router.push(`/artikel/pengumuman/cari?q=${searchValue.value}`);
+    await router.push(`/admin/artikel/pengumuman/cari?q=${searchValue.value}`);
   }
 };
 </script>

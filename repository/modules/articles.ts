@@ -329,6 +329,34 @@ class ArticlesModule extends HttpFactory {
             },
         });
     }
+
+    async undraftAnnouncement(id: number, token: string): Promise<{
+        success: boolean; message: {
+            announcement: Article;
+        },
+        error: string,
+    }> {
+        return this.request(`${this.ROUTE}/announcements/${id}/undraft`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+    }
+
+    async undraftNews(id: number, token: string): Promise<{
+        success: boolean; message: {
+            announcement: Article;
+        },
+        error: string,
+    }> {
+        return this.request(`${this.ROUTE}/news/${id}/undraft`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+    }
 }
 
 export default ArticlesModule;

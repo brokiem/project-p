@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import {ArticleFlags} from "~/utils/articles";
+
 let BlotFormatter: any;
 let ImageUploader: any;
 let Delta: any;
@@ -151,6 +153,130 @@ async function publishArticle() {
   });
 }
 
+async function draftArticle(value: boolean = true) {
+  // @ts-ignore
+  $swal.fire({
+    title: "Memproses...",
+    showConfirmButton: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      // @ts-ignore
+      $swal.showLoading();
+    },
+  });
+
+  // Upload image if needed
+  if (imageHeaderNeedsUpdate.value) {
+    const file = (document.getElementById("file_input") as HTMLInputElement).files![0];
+    try {
+      announcement.value.image_url = await uploadImage(file);
+    } catch (e) {
+      // @ts-ignore
+      $swal.fire({
+        title: "Operasi gagal",
+        text: e,
+        icon: "error",
+        showConfirmButton: true,
+        didOpen: () => {
+          // @ts-ignore
+          $swal.hideLoading();
+        },
+      });
+      return;
+    }
+  }
+
+  // Check if input fields are filled and valid
+  if (!announcement.value.image_url || !announcement.value.title || !announcement.value.summary || !editorContentDelta.value) {
+    // @ts-ignore
+    $swal.fire({
+      title: "Operasi gagal",
+      text: "Mohon isi semua kolom yang diperlukan. Kolom kosong: " + (announcement.value.image_url ? "" : "Gambar header, ") + (announcement.value.title ? "" : "Judul, ") + (announcement.value.summary ? "" : "Ringkasan, ") + (editorContentDelta.value ? "" : "Isi artikel"),
+      icon: "error",
+      showConfirmButton: true,
+      didOpen: () => {
+        // @ts-ignore
+        $swal.hideLoading();
+      },
+    });
+    return;
+  }
+
+  // Update article content
+  announcement.value.content = editorContentDelta.value;
+
+  const res = await $api.articles.updateAnnouncement(announcement.value.id, announcement.value.image_url, announcement.value.title, announcement.value.summary, announcement.value.content, announcement.value.flags, token.value!);
+  if (!res.success) {
+    // @ts-ignore
+    $swal.fire({
+      title: "Operasi gagal",
+      text: res.error,
+      icon: "error",
+      showConfirmButton: true,
+      didOpen: () => {
+        // @ts-ignore
+        $swal.hideLoading();
+      },
+    });
+    return;
+  }
+
+  if (!value) {
+    // Undraft article
+    const draftRes = await $api.articles.undraftAnnouncement(announcement.value.id, token.value!);
+    if (!draftRes.success) {
+      // @ts-ignore
+      $swal.fire({
+        title: "Operasi gagal",
+        text: draftRes.error,
+        icon: "error",
+        showConfirmButton: true,
+        didOpen: () => {
+          // @ts-ignore
+          $swal.hideLoading();
+        },
+      });
+      return;
+    }
+
+    // @ts-ignore
+    $swal.fire({
+      title: "Artikel berhasil di undraf",
+      icon: "success",
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: true,
+    });
+    return;
+  }
+
+  // Draft article
+  const draftRes = await $api.articles.draftAnnouncement(announcement.value.id, token.value!);
+  if (!draftRes.success) {
+    // @ts-ignore
+    $swal.fire({
+      title: "Operasi gagal",
+      text: draftRes.error,
+      icon: "error",
+      showConfirmButton: true,
+      didOpen: () => {
+        // @ts-ignore
+        $swal.hideLoading();
+      },
+    });
+    return;
+  }
+
+  // @ts-ignore
+  $swal.fire({
+    title: "Artikel berhasil didraf",
+    icon: "success",
+    timer: 3000,
+    timerProgressBar: true,
+    showConfirmButton: true,
+  });
+}
+
 function updatePreview() {
   imageHeaderNeedsUpdate.value = true;
 
@@ -187,6 +313,8 @@ function uploadImage(file: File): Promise<string> {
     }
   });
 }
+
+const isDraft = hasFlag(announcement.value.flags!, ArticleFlags.IS_DRAFT);
 </script>
 
 <template>
@@ -294,10 +422,19 @@ function uploadImage(file: File): Promise<string> {
     </button>
     <!-- Draft article button -->
     <button
+        v-if="!isDraft"
         class="transition duration-150 mt-5 shadow-sm text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-md text-sm px-5 py-2 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
         type="button"
-        @click="">
+        @click="draftArticle">
       Draf Artikel
+    </button>
+    <!-- Undraft article button -->
+    <button
+        v-if="isDraft"
+        class="transition duration-150 mt-5 shadow-sm text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-md text-sm px-5 py-2 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+        type="button"
+        @click="draftArticle(false)">
+      Undraft Artikel
     </button>
     <!-- Publish article button -->
     <button

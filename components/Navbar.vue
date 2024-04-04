@@ -1,10 +1,10 @@
 <script lang="ts">
-import { defineComponent } from "vue";
-import { Bars3Icon, ChevronDownIcon } from "@heroicons/vue/20/solid";
+import {defineComponent} from "vue";
+import {Bars3Icon, ChevronDownIcon} from "@heroicons/vue/20/solid";
 
 export default defineComponent({
   name: "Navbar",
-  components: { ChevronDownIcon, Bars3Icon },
+  components: {ChevronDownIcon, Bars3Icon},
 });
 </script>
 
@@ -151,6 +151,13 @@ export default defineComponent({
                 </ul>
               </div>
             </div>
+          </li>
+          <!-- TODO: Check if user has permissions to do administrator things -->
+          <li v-if="useCurrentUser().value !== null">
+            <NuxtLink to="/admin"
+                      class="no-underline select-none block py-2 pl-3 pr-4 text-gray-700 bg-gray-100 md:bg-transparent rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+              Admin
+            </NuxtLink>
           </li>
         </ul>
       </div>

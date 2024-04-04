@@ -1,6 +1,22 @@
 <script lang="ts" setup>
 import {CalendarIcon, MegaphoneIcon} from "@heroicons/vue/20/solid";
 
+let BlotFormatter: any;
+let Delta: any;
+
+// Only import these modules on client side
+if (process.client) {
+  import('quill-blot-formatter').then(module => {
+    BlotFormatter = module.default;
+  });
+
+  import('quill-delta').then(module => {
+    Delta = module.default;
+  });
+
+  import('quill-image-uploader/dist/quill.imageUploader.min.css');
+}
+
 function error404() {
   return createError({
     statusCode: 404,
@@ -42,12 +58,33 @@ useHead({
   meta: [
     {
       name: "description",
-      content: announcement.content.length > 160 ? `${announcement.content.slice(0, 160)}...` : announcement.content,
+      content: announcement.summary,
     },
   ],
 });
 
+const modules = [
+  {
+    name: 'blotFormatter',
+    module: BlotFormatter,
+    options: {}
+  },
+];
+
 const articleCreatedDate = formatArticleDate(announcement.created_at);
+const editorContentDelta = ref(null);
+
+function editorReady() {
+  console.log("Editor ready!");
+
+  const toolbar = document.querySelector(".ql-toolbar");
+  if (toolbar) {
+    toolbar.remove();
+  }
+
+  // @ts-ignore
+  editorContentDelta.value = new Delta(announcement.content);
+}
 </script>
 
 <template>
@@ -69,15 +106,28 @@ const articleCreatedDate = formatArticleDate(announcement.created_at);
         </div>
       </div>
 
-      <div class="mt-10">
+      <div class="mt-8">
         <p class="text-lg leading-8 text-gray-900 dark:text-gray-400">
-          {{ announcement.content }}
+          <ClientOnly>
+            <quill-editor
+                v-model:content="editorContentDelta"
+                :modules="modules"
+                class="!rounded-b-md !border-none"
+                content-type="delta"
+                theme="snow"
+                :toolbar="[]"
+                @ready="editorReady"
+            />
+          </ClientOnly>
         </p>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-
+<style>
+.ql-editor {
+  padding: 0 !important;
+  border: 0 !important;
+}
 </style>

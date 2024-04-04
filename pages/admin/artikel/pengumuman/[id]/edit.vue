@@ -40,11 +40,11 @@ if (isNaN(articleId)) {
 // Fetch article data
 const {$api, $swal} = useNuxtApp();
 const token = useCookie("token");
-const {message: articleResponse} = await $api.articles.getNewsById(articleId, token.value!);
-const news = ref(articleResponse.news);
+const {message: articleResponse} = await $api.articles.getAnnouncementById(articleId, token.value!);
+const announcement = ref(articleResponse.announcement);
 
 // Check if article exists
-if (!news) {
+if (!announcement) {
   // Return nuxt 404 page
   throw error404();
 }
@@ -73,7 +73,7 @@ function editorReady() {
   console.log("Editor ready!");
 
   // @ts-ignore
-  editorContentDelta.value = new Delta(news.value.content);
+  editorContentDelta.value = new Delta(announcement.value.content);
 }
 
 async function publishArticle() {
@@ -92,7 +92,7 @@ async function publishArticle() {
   if (imageHeaderNeedsUpdate.value) {
     const file = (document.getElementById("file_input") as HTMLInputElement).files![0];
     try {
-      news.value.image_url = await uploadImage(file);
+      announcement.value.image_url = await uploadImage(file);
     } catch (e) {
       // @ts-ignore
       $swal.fire({
@@ -106,9 +106,9 @@ async function publishArticle() {
   }
 
   // Update article content
-  news.value.content = editorContentDelta.value;
+  announcement.value.content = editorContentDelta.value;
 
-  const res = await $api.articles.updateNews(news.value.id, news.value.image_url, news.value.title, news.value.summary, news.value.content, news.value.flags, news.value.author_uuid, token.value!);
+  const res = await $api.articles.updateAnnouncement(announcement.value.id, announcement.value.image_url, announcement.value.title, announcement.value.summary, announcement.value.content, announcement.value.flags, announcement.value.author_uuid, token.value!);
   if (!res.success) {
     // @ts-ignore
     $swal.fire({
@@ -169,7 +169,7 @@ function uploadImage(file: File): Promise<string> {
 </script>
 
 <template>
-  <Header title="Edit Berita"></Header>
+  <Header title="Edit Pengumuman"></Header>
 
   <div class="mt-12 mb-12 container mx-auto max-w-[770px] px-8 lg:px-0">
     <!-- Article image header input -->
@@ -179,13 +179,13 @@ function uploadImage(file: File): Promise<string> {
     <input id="file_input" accept="image/*" class="mb-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" @change="updatePreview">
 
     <!-- Preview uploaded image -->
-    <img v-if="news.image_url !== ''" id="preview-img" :src="news.image_url" alt="Article header image" class="mb-4 rounded-md aspect-video w-full object-contain" style="background-color: #d0d1d3;">
+    <img v-if="announcement.image_url !== ''" id="preview-img" :src="announcement.image_url" alt="Article header image" class="mb-4 rounded-md aspect-video w-full object-contain" style="background-color: #d0d1d3;">
 
     <!-- Article title input -->
     <label class="mb-2 text-sm text-gray-900" for="article-title">
       Judul artikel <span class="text-red-600">*</span>
     </label>
-    <input id="article-title" v-model="news.title" class="rounded-md transition duration-50 block w-full p-2 mb-4 text-sm text-gray-900 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    <input id="article-title" v-model="announcement.title" class="rounded-md transition duration-50 block w-full p-2 mb-4 text-sm text-gray-900 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
            placeholder="Judul artikel"
            required type="text"
            maxlength="60"
@@ -195,7 +195,7 @@ function uploadImage(file: File): Promise<string> {
     <label class="mb-2 text-sm text-gray-900" for="article-title">
       Ringkasan artikel (summary) <span class="text-red-600">*</span>
     </label>
-    <input id="article-summary" v-model="news.summary" class="rounded-md transition duration-50 block w-full p-2 mb-4 text-sm text-gray-900 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    <input id="article-summary" v-model="announcement.summary" class="rounded-md transition duration-50 block w-full p-2 mb-4 text-sm text-gray-900 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
            placeholder="Ringkasan artikel"
            required type="text"
            maxlength="135"
@@ -258,7 +258,7 @@ function uploadImage(file: File): Promise<string> {
     <label class="block mt-4 mb-1 text-sm text-gray-9yarn00 dark:text-white" for="article-type">
       Tipe Artikel <span class="text-red-600">*</span>
     </label>
-    <select disabled id="article-type" v-model="news.type" class="rounded-md transition duration-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <select disabled id="article-type" v-model="announcement.type" class="rounded-md transition duration-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
       <option disabled>Pilih tipe artikel</option>
       <option value="ANNOUNCEMENT">Pengumuman</option>
       <option value="NEWS">Berita</option>

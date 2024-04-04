@@ -113,7 +113,7 @@ export default defineComponent({
     <div class="px-4 pt-3 pb-2">
       <!-- Card article title -->
       <h3 class="mb-2 text-xl font-normal tracking-tight text-gray-800">
-        {{ title.length > titlePreviewMaxLength ? title.substring(0, titlePreviewMaxLength) + "..." : title }} {{ id }}
+        {{ title.length > titlePreviewMaxLength ? title.substring(0, titlePreviewMaxLength) + "..." : title }}
       </h3>
       <!-- Card article description with limit of 135 chars -->
       <p class="font-normal text-gray-500 text-md overflow-hidden">

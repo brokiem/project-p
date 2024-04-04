@@ -5,6 +5,17 @@ const token = useCookie("token");
 const isLoggedIn = ref(currentUser.value != null);
 
 function logout() {
+  // @ts-ignore
+  $swal.fire({
+    title: "Memproses...",
+    showConfirmButton: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      // @ts-ignore
+      $swal.showLoading();
+    },
+  });
+
   isLoggedIn.value = false;
   token.value = null;
   currentUser.value = null;
@@ -17,6 +28,10 @@ function logout() {
       timer: 2000,
       timerProgressBar: true,
       showConfirmButton: true,
+      didOpen: () => {
+        // @ts-ignore
+        $swal.hideLoading();
+      },
     });
   }, 500);
 }

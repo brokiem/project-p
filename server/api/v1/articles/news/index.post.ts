@@ -14,7 +14,9 @@ export default defineEventHandler(async (event) => {
             return forbiddenResponse("You do not have permission to create news");
         }
 
-        const { image_url, title, summary, content, flags, author_uuid } = await readBody(event);
+        const { image_url, title, summary, content, flags } = await readBody(event);
+
+        const author_uuid = user.uuid;
 
         // @ts-ignore
         // Combined mask for all valid flags

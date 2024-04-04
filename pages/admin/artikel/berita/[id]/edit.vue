@@ -5,20 +5,17 @@ let Delta: any;
 
 // Only import these modules on client side
 if (process.client) {
-  import('quill-blot-formatter').then(module => {
-    BlotFormatter = module.default;
-  });
+  const blotFormatterModule = await import('quill-blot-formatter');
+  BlotFormatter = blotFormatterModule.default;
 
-  import('quill-delta').then(module => {
-    Delta = module.default;
-  });
+  const deltaModule = await import('quill-delta');
+  Delta = deltaModule.default;
 
   // @ts-ignore
-  import('quill-image-uploader').then(module => {
-    ImageUploader = module.default;
-  });
+  const imageUploaderModule = await import('quill-image-uploader');
+  ImageUploader = imageUploaderModule.default;
 
-  import('quill-image-uploader/dist/quill.imageUploader.min.css');
+  await import('quill-image-uploader/dist/quill.imageUploader.min.css');
 }
 
 function error404() {
@@ -108,7 +105,7 @@ async function publishArticle() {
   // Update article content
   news.value.content = editorContentDelta.value;
 
-  const res = await $api.articles.updateNews(news.value.id, news.value.image_url, news.value.title, news.value.summary, news.value.content, news.value.flags, news.value.author_uuid, token.value!);
+  const res = await $api.articles.updateNews(news.value.id, news.value.image_url, news.value.title, news.value.summary, news.value.content, news.value.flags, token.value!);
   if (!res.success) {
     // @ts-ignore
     $swal.fire({

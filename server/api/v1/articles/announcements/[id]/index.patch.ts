@@ -24,7 +24,9 @@ export default defineEventHandler(async (event) => {
 
         if (!announcement) return notFoundResponse("Announcement not found");
 
-        const { title, content, summary, image_url, author_uuid } = await readBody(event);
+        const { title, content, summary, image_url } = await readBody(event);
+
+        const author_uuid = user.uuid;
 
         const updatedAnnouncement = await prisma.articles.update({
             where: { id: parseInt(id) },

@@ -6,15 +6,13 @@ let Delta: any;
 
 // Only import these modules on client side
 if (process.client) {
-  import('quill-blot-formatter').then(module => {
-    BlotFormatter = module.default;
-  });
+  const blotFormatterModule = await import('quill-blot-formatter');
+  BlotFormatter = blotFormatterModule.default;
 
-  import('quill-delta').then(module => {
-    Delta = module.default;
-  });
+  const deltaModule = await import('quill-delta');
+  Delta = deltaModule.default;
 
-  import('quill-image-uploader/dist/quill.imageUploader.min.css');
+  await import('quill-image-uploader/dist/quill.imageUploader.min.css');
 }
 
 function error404() {

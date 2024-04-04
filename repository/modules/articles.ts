@@ -186,7 +186,7 @@ class ArticlesModule extends HttpFactory {
         return this.request(url.toString(), request);
     }
 
-    async createAnnouncement(image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, author_uuid: string, token: string): Promise<{
+    async createAnnouncement(image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, token: string): Promise<{
         success: boolean; message: {
             announcement: ArticleType[];
         },
@@ -204,12 +204,11 @@ class ArticlesModule extends HttpFactory {
                 summary,
                 content,
                 flags,
-                author_uuid,
             }),
         });
     }
 
-    async createNews(image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, author_uuid: string, token: string): Promise<{
+    async createNews(image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, token: string): Promise<{
         success: boolean; message: {
             news: ArticleType[];
         },
@@ -227,12 +226,11 @@ class ArticlesModule extends HttpFactory {
                 summary,
                 content,
                 flags,
-                author_uuid,
             }),
         });
     }
 
-    async updateAnnouncement(id: number, image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, author_uuid: string, token: string): Promise<{
+    async updateAnnouncement(id: number, image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, token: string): Promise<{
         success: boolean; message: {
             announcement: ArticleType[];
         },
@@ -250,12 +248,11 @@ class ArticlesModule extends HttpFactory {
                 summary,
                 content,
                 flags,
-                author_uuid,
             }),
         });
     }
 
-    async updateNews(id: number, image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, author_uuid: string, token: string): Promise<{
+    async updateNews(id: number, image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, token: string): Promise<{
         success: boolean; message: {
             news: ArticleType[];
         },
@@ -273,7 +270,6 @@ class ArticlesModule extends HttpFactory {
                 summary,
                 content,
                 flags,
-                author_uuid,
             }),
         });
     }

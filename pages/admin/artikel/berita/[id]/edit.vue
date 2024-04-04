@@ -97,9 +97,29 @@ async function publishArticle() {
         text: e,
         icon: "error",
         showConfirmButton: true,
+        didOpen: () => {
+          // @ts-ignore
+          $swal.hideLoading();
+        },
       });
       return;
     }
+  }
+
+  // Check if input fields are filled and valid
+  if (!news.value.image_url || !news.value.title || !news.value.summary || !editorContentDelta.value) {
+    // @ts-ignore
+    $swal.fire({
+      title: "Operasi gagal",
+      text: "Mohon isi semua kolom yang diperlukan. Kolom kosong: " + (news.value.image_url ? "" : "Gambar header, ") + (news.value.title ? "" : "Judul, ") + (news.value.summary ? "" : "Ringkasan, ") + (editorContentDelta.value ? "" : "Isi artikel"),
+      icon: "error",
+      showConfirmButton: true,
+      didOpen: () => {
+        // @ts-ignore
+        $swal.hideLoading();
+      },
+    });
+    return;
   }
 
   // Update article content
@@ -113,6 +133,10 @@ async function publishArticle() {
       text: res.error,
       icon: "error",
       showConfirmButton: true,
+      didOpen: () => {
+        // @ts-ignore
+        $swal.hideLoading();
+      },
     });
     return;
   }

@@ -88,7 +88,7 @@ try {
           <!-- Section title -->
           <div class="max-w-screen-xl mb-8 lg:mb-10">
             <h2 class="mb-4 text-3xl tracking-tight font-medium text-gray-900 dark:text-white">
-              Pengumuman & Berita
+              Pengumuman & Berita Terbaru
             </h2>
           </div>
 

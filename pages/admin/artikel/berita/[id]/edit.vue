@@ -241,7 +241,7 @@ async function draftArticle(value: boolean = true) {
 
     // @ts-ignore
     $swal.fire({
-      title: "Artikel berhasil di undraf",
+      title: "Artikel berhasil diperbarui dan diundraf",
       icon: "success",
       timer: 3000,
       timerProgressBar: true,
@@ -269,7 +269,7 @@ async function draftArticle(value: boolean = true) {
 
   // @ts-ignore
   $swal.fire({
-    title: "Artikel berhasil didraf",
+    title: "Artikel berhasil diperbarui dan didraf",
     icon: "success",
     timer: 3000,
     timerProgressBar: true,

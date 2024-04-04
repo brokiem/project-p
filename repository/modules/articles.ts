@@ -2,7 +2,7 @@ import type { Prisma } from "@prisma/client";
 import HttpFactory from "~/repository/factory";
 import { ArticleFlags, type ArticleType as TheArticleType } from "~/utils/articles";
 
-export type ArticleType = {
+export type Article = {
     id: number;
     image_url: string;
     title: string;
@@ -35,7 +35,7 @@ class ArticlesModule extends HttpFactory {
 
     async getAnnouncementById(id: number, token?: string): Promise<{
         success: boolean; message: {
-            announcement: ArticleType;
+            announcement: Article;
         }
     }> {
         const request: RequestInit = {
@@ -54,7 +54,7 @@ class ArticlesModule extends HttpFactory {
 
     async getAnnouncements(offset: number | null, limit: number | null, token?: string): Promise<{
         success: boolean; message: {
-            announcements: ArticleType[];
+            announcements: Article[];
         }
     }> {
         const url = new URL(`${this.ROUTE}/announcements`);
@@ -82,7 +82,7 @@ class ArticlesModule extends HttpFactory {
 
     async searchAnnouncements(query: string, token?: string): Promise<{
         success: boolean; message: {
-            announcements: ArticleType[];
+            announcements: Article[];
         }
     }> {
         const url = new URL(`${this.ROUTE}/announcements/search`);
@@ -119,7 +119,7 @@ class ArticlesModule extends HttpFactory {
 
     async getNewsById(id: number, token?: string): Promise<{
         success: boolean; message: {
-            news: ArticleType;
+            news: Article;
         }
     }> {
         const request: RequestInit = {
@@ -138,7 +138,7 @@ class ArticlesModule extends HttpFactory {
 
     async getNews(offset: number | null, limit: number | null, token?: string): Promise<{
         success: boolean; message: {
-            news: ArticleType[];
+            news: Article[];
         }
     }> {
         const url = new URL(`${this.ROUTE}/news`);
@@ -166,7 +166,7 @@ class ArticlesModule extends HttpFactory {
 
     async searchNews(query: string, token?: string): Promise<{
         success: boolean; message: {
-            news: ArticleType[];
+            news: Article[];
         }
     }> {
         const url = new URL(`${this.ROUTE}/news/search`);
@@ -188,7 +188,7 @@ class ArticlesModule extends HttpFactory {
 
     async createAnnouncement(image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, token: string): Promise<{
         success: boolean; message: {
-            announcement: ArticleType[];
+            announcement: Article;
         },
         error: string,
     }> {
@@ -210,7 +210,7 @@ class ArticlesModule extends HttpFactory {
 
     async createNews(image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, token: string): Promise<{
         success: boolean; message: {
-            news: ArticleType[];
+            news: Article;
         },
         error: string,
     }> {
@@ -232,7 +232,7 @@ class ArticlesModule extends HttpFactory {
 
     async updateAnnouncement(id: number, image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, token: string): Promise<{
         success: boolean; message: {
-            announcement: ArticleType[];
+            announcement: Article;
         },
         error: string,
     }> {
@@ -254,7 +254,7 @@ class ArticlesModule extends HttpFactory {
 
     async updateNews(id: number, image_url: string, title: string, summary: string, content: Prisma.JsonValue, flags: ArticleFlags, token: string): Promise<{
         success: boolean; message: {
-            news: ArticleType[];
+            news: Article;
         },
         error: string,
     }> {
@@ -271,6 +271,34 @@ class ArticlesModule extends HttpFactory {
                 content,
                 flags,
             }),
+        });
+    }
+
+    async draftAnnouncement(id: number, token: string): Promise<{
+        success: boolean; message: {
+            announcement: Article;
+        },
+        error: string,
+    }> {
+        return this.request(`${this.ROUTE}/announcements/${id}/draft`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+    }
+
+    async draftNews(id: number, token: string): Promise<{
+        success: boolean; message: {
+            news: Article;
+        },
+        error: string,
+    }> {
+        return this.request(`${this.ROUTE}/news/${id}/draft`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
         });
     }
 }

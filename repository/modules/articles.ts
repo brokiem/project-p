@@ -301,6 +301,34 @@ class ArticlesModule extends HttpFactory {
             },
         });
     }
+
+    async deleteAnnouncement(id: number, token: string): Promise<{
+        success: boolean; message: {
+            announcement: Article;
+        },
+        error: string,
+    }> {
+        return this.request(`${this.ROUTE}/announcements/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+    }
+
+    async deleteNews(id: number, token: string): Promise<{
+        success: boolean; message: {
+            news: Article;
+        },
+        error: string,
+    }> {
+        return this.request(`${this.ROUTE}/news/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+    }
 }
 
 export default ArticlesModule;

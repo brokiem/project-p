@@ -10,6 +10,12 @@ class ExtracurricularsModule extends HttpFactory {
         });
     }
 
+    async getById(id: number): Promise<{ success: boolean, message: { extracurricular: { id: number; title: string; description: string; extracurricular_mentors: { id: number; users: User; }[]; } }, error: string }> {
+        return this.request(`${this.ROUTE}/${id}`, {
+            method: "GET",
+        });
+    }
+
     async add(title: string, description: string, mentor_uuids: string, token: string): Promise<{ success: boolean, message: { extracurricular: { id: number; title: string; description: string; extracurricular_mentors: { id: number; users: User; }[]; } }, error: string }> {
         return this.request(this.ROUTE, {
             method: "POST",

@@ -16,6 +16,8 @@ export enum Permissions {
     CREATE_COMPETENCY = 1 << 8,
     MANAGE_COMPETENCY = 1 << 9,
     UPLOAD_MEDIA = 1 << 10,
+    CREATE_USER = 1 << 11,
+    MANAGE_USER = 1 << 12,
 }
 
 // Check if a user has a permission

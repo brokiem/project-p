@@ -3,6 +3,7 @@ import ExtracurricularsModule from "~/repository/modules/extracurriculars";
 import AuthModule from "~/repository/modules/auth";
 import ArticlesModule from "~/repository/modules/articles";
 import MediaModule from "~/repository/modules/media";
+import UsersModule from "~/repository/modules/users";
 
 interface IApiInstance {
     competencies: CompetenciesModule;
@@ -10,6 +11,7 @@ interface IApiInstance {
     auth: AuthModule;
     articles: ArticlesModule;
     media: MediaModule;
+    users: UsersModule;
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -24,6 +26,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         auth: new AuthModule(apiBaseUrl),
         articles: new ArticlesModule(apiBaseUrl),
         media: new MediaModule(apiBaseUrl),
+        users: new UsersModule(apiBaseUrl),
     };
 
     return {

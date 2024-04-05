@@ -124,12 +124,13 @@ export default defineComponent({
     <!-- Card article buttons -->
     <div class="flex flex-row gap-x-2 px-4 pb-4 pt-2 mt-auto w-full">
       <NuxtLink :to="articleUrl" class="grow">
-        <button class="w-full text-white bg-blue-600 hover:bg-blue-800 font-normal rounded-md text-normal px-4 py-1.5 text-center transition duration-200" type="button">
+        <button class="w-full shadow font-base transition duration-200 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-2 focus:ring-gray-200 rounded-lg text-sm px-4 py-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                type="button">
           Baca
         </button>
       </NuxtLink>
       <NuxtLink :to="editArticleUrl">
-        <button class="text-white bg-yellow-600 hover:bg-yellow-800 font-normal rounded-md text-normal px-4 py-1.5 text-center transition duration-200" type="button">
+        <button class="text-white bg-blue-600 hover:bg-blue-800 font-normal rounded-md text-normal px-4 py-1.5 text-center transition duration-200" type="button">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>

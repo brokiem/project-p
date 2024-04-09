@@ -5,6 +5,11 @@ definePageMeta({
 
 import type {User} from "~/utils/user";
 import type {Ref} from "vue";
+import {initFlowbite} from "flowbite";
+
+onMounted(() => {
+  initFlowbite();
+});
 
 const token = useCookie("token");
 
@@ -29,8 +34,7 @@ async function loadAllUsers() {
   const {$api} = useNuxtApp();
   const {message} = await $api.users.getUsers(token.value!);
 
-  // mutiply allUsers 3 times
-  allUsers.value = message.users.concat(message.users, message.users);
+  allUsers.value = message.users;
 }
 
 try {

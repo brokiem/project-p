@@ -135,6 +135,8 @@ async function publishArticle() {
     timer: 3000,
     timerProgressBar: true,
     showConfirmButton: true,
+  }).then(async () => {
+    await navigateTo('/admin/artikel/pengumuman');
   });
 }
 
@@ -214,6 +216,8 @@ async function draftArticle() {
     timer: 3000,
     timerProgressBar: true,
     showConfirmButton: true,
+  }).then(async () => {
+    await navigateTo('/admin/artikel/pengumuman');
   });
 }
 

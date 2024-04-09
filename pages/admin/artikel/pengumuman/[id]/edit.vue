@@ -356,6 +356,8 @@ function deleteArticle() {
           icon: "success",
           confirmButtonText: "Tutup",
           confirmButtonColor: "#3B82F6",
+        }).then(async () => {
+          await navigateTo('/admin/artikel/pengumuman');
         });
       } else {
         // @ts-ignore

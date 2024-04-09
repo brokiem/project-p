@@ -186,8 +186,8 @@ async function deleteExtracurricular() {
           text: "Ekstrakurikuler berhasil dihapus",
           icon: "success",
           confirmButtonText: "Tutup",
-        }).then(() => {
-          window.location.href = "/admin/ekstrakurikuler";
+        }).then(async () => {
+          await navigateTo('/admin/ekstrakurikuler');
         });
       } else {
         // @ts-ignore

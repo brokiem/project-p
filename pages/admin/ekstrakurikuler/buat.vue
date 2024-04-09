@@ -102,6 +102,8 @@ async function editExtracurricular() {
       text: "Ekstrakurikuler berhasil dibuat",
       icon: "success",
       confirmButtonText: "Tutup",
+    }).then(async () => {
+      await navigateTo('/admin/ekstrakurikuler');
     });
   } else {
     // @ts-ignore

@@ -77,6 +77,8 @@ export default defineComponent({
               icon: "success",
               confirmButtonText: "Tutup",
               confirmButtonColor: "#3B82F6",
+            }).then(() => {
+              location.reload();
             });
           } else {
             // @ts-ignore

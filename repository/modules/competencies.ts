@@ -3,7 +3,13 @@ import HttpFactory from "~/repository/factory";
 class CompetenciesModule extends HttpFactory {
     private readonly ROUTE = `${this.API_URL}/competencies`;
 
-    async get(): Promise<{ success: boolean, message: { competencies: { id: number; title: string; description: string; }[] }, error: string }> {
+    async getById(id: number): Promise<{ success: boolean, message: { competency: { id: number; title: string; description: string; } }, error: string }> {
+        return this.request(`${this.ROUTE}/${id}`, {
+            method: "GET",
+        });
+    }
+
+    async getAll(): Promise<{ success: boolean, message: { competencies: { id: number; title: string; description: string; }[] }, error: string }> {
         return this.request(this.ROUTE, {
             method: "GET",
         });
@@ -23,7 +29,7 @@ class CompetenciesModule extends HttpFactory {
         });
     }
 
-    async edit(id: number, newTitle: string, newDescription: string, token: string): Promise<{ success: boolean, message: { competencies: { id: number; title: string; description: string; } }, error: string }> {
+    async edit(id: number, title: string, description: string, token: string): Promise<{ success: boolean, message: { competencies: { id: number; title: string; description: string; } }, error: string }> {
         return this.request(`${this.ROUTE}/${id}`, {
             method: "PATCH",
             headers: {
@@ -31,8 +37,8 @@ class CompetenciesModule extends HttpFactory {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                newTitle,
-                newDescription,
+                title,
+                description,
             }),
         });
     }

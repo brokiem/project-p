@@ -14,8 +14,8 @@ export default defineEventHandler(async (event) => {
         }
 
         const { title, description } = await readBody(event);
-        const competency = prisma.competencies.create({
-            data: { title, description },
+        const competency = await prisma.competencies.create({
+            data: { title: title, description: description },
         });
 
         return successResponse({ competency }, 201);

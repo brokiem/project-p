@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+definePageMeta({
+  middleware: ["auth"],
+});
+
 let BlotFormatter: any;
 let ImageUploader: any;
 let Delta: any;

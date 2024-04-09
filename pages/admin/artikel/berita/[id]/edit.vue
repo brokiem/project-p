@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+definePageMeta({
+  middleware: ["auth"],
+});
+
 import {ArticleFlags} from "~/utils/articles";
 
 let BlotFormatter: any;

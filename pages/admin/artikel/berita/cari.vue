@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+definePageMeta({
+  middleware: ["auth"],
+});
+
 import {MagnifyingGlassIcon} from "@heroicons/vue/20/solid";
 
 const router = useRouter();

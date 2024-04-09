@@ -2,7 +2,7 @@
 import {MagnifyingGlassIcon} from "@heroicons/vue/20/solid";
 
 definePageMeta({
-  middleware: ["verify-article-page"],
+  middleware: ["verify-article-page", "auth"],
 });
 
 const {$api} = useNuxtApp();
@@ -38,9 +38,18 @@ const searchArticle = async () => {
       <div class="py-8 px-4 mx-auto md:max-w-[1250px] lg:py-16 lg:px-6">
         <!-- Section title -->
         <div class="max-w-screen-xl mb-8 lg:mb-10">
-          <h2 class="mb-1.5 text-3xl tracking-tight font-medium text-gray-900 dark:text-white">
-            Kelola Pengumuman
-          </h2>
+          <div class="flex flex-row gap-x-4">
+            <h2 class="mb-1.5 text-3xl tracking-tight font-medium text-gray-900 dark:text-white">
+              Kelola Pengumuman
+            </h2>
+            <!-- Create icon -->
+            <NuxtLink to="/admin/artikel/berita/buat" class="flex items-center justify-center bg-blue-600 hover:bg-blue-700 w-10 h-10 text-white rounded-full text-sm">
+              <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+              </svg>
+              <span class="sr-only">Create</span>
+            </NuxtLink>
+          </div>
           <h3 class="mb-3">Halaman {{ currentPage }} dari {{ totalPaginationPages }} ({{ articlesPerPage }} hasil per halaman)</h3>
         </div>
 

@@ -13,7 +13,7 @@ const competencies: Ref<{ id: number, title: string, description: string }[]> = 
 
 async function loadCompetencies() {
   const { $api } = useNuxtApp();
-  const { message } = await $api.competencies.get();
+  const {message} = await $api.competencies.getAll();
 
   competencies.value = message.competencies;
 }

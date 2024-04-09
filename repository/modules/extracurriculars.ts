@@ -31,7 +31,7 @@ class ExtracurricularsModule extends HttpFactory {
         });
     }
 
-    async edit(id: number, newTitle: string, newDescription: string, token: string): Promise<{ success: boolean, message: { extracurriculars: { id: number; title: string; description: string; extracurricular_mentors: { id: number; users: User; }[]; } }, error: string }> {
+    async edit(id: number, title: string, description: string, mentor_uuids: string, token: string): Promise<{ success: boolean, message: { extracurriculars: { id: number; title: string; description: string; extracurricular_mentors: { id: number; users: User; }[]; } }, error: string }> {
         return this.request(`${this.ROUTE}/${id}`, {
             method: "PATCH",
             headers: {
@@ -39,8 +39,9 @@ class ExtracurricularsModule extends HttpFactory {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                newTitle,
-                newDescription,
+                title,
+                description,
+                mentor_uuids,
             }),
         });
     }

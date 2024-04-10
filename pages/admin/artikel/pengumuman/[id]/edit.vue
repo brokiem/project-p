@@ -1,28 +1,12 @@
 <script lang="ts" setup>
+import type Delta from "quill-delta";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import {ArticleFlags} from "~/utils/articles";
+
 definePageMeta({
   middleware: ["auth"],
 });
-
-import {ArticleFlags} from "~/utils/articles";
-
-let BlotFormatter: any;
-let ImageUploader: any;
-let Delta: any;
-
-// Only import these modules on client side
-if (process.client) {
-  const blotFormatterModule = await import('quill-blot-formatter');
-  BlotFormatter = blotFormatterModule.default;
-
-  const deltaModule = await import('quill-delta');
-  Delta = deltaModule.default;
-
-  // @ts-ignore
-  const imageUploaderModule = await import('quill-image-uploader');
-  ImageUploader = imageUploaderModule.default;
-
-  await import('quill-image-uploader/dist/quill.imageUploader.min.css');
-}
 
 function error404() {
   return createError({
@@ -52,32 +36,42 @@ if (!announcement) {
   throw error404();
 }
 
-const modules = [
-  {
-    name: 'blotFormatter',
-    module: BlotFormatter,
-    options: {}
-  },
-  {
-    name: 'imageUploader',
-    module: ImageUploader,
-    options: {
-      upload: (file: File) => {
-        return uploadImage(file);
-      }
-    }
-  },
-];
-
 const imageHeaderNeedsUpdate = ref(false);
-const editorContentDelta = ref(null);
+const editorContentDelta = ref<Delta>();
 
-function editorReady() {
-  console.log("Editor ready!");
+onMounted(async () => {
+  // Only import these modules on client side
+  if (process.client) {
+    await import('quill-image-uploader/dist/quill.imageUploader.min.css');
 
-  // @ts-ignore
-  editorContentDelta.value = new Delta(announcement.value.content);
-}
+    const Quill = (await import("quill")).default;
+    // @ts-ignore
+    const BlotFormatter = (await import('quill-blot-formatter-mobile/dist/BlotFormatter')).default;
+    // @ts-ignore
+    const ImageUploader = (await import('quill-image-uploader/src/quill.imageUploader')).default;
+    const Delta = Quill.import('delta');
+
+    Quill.register('modules/blotFormatter', BlotFormatter);
+    Quill.register('modules/imageUploader', ImageUploader);
+
+    const quill = new Quill("#editor", {
+      theme: "snow",
+      modules: {
+        toolbar: "#toolbar-container",
+        blotFormatter: {},
+        imageUploader: {
+          upload: (file: File) => {
+            return uploadImage(file);
+          }
+        }
+      }
+    });
+    quill.on('text-change', (_) => {
+      editorContentDelta.value = quill.getContents();
+    });
+    quill.setContents(new Delta(announcement.value.content));
+  }
+});
 
 async function publishArticle() {
   // @ts-ignore
@@ -129,6 +123,7 @@ async function publishArticle() {
   }
 
   // Update article content
+  // @ts-ignore
   announcement.value.content = editorContentDelta.value;
 
   const res = await $api.articles.updateAnnouncement(announcement.value.id, announcement.value.image_url, announcement.value.title, announcement.value.summary, announcement.value.content, announcement.value.flags, token.value!);
@@ -207,6 +202,7 @@ async function draftArticle(value: boolean = true) {
   }
 
   // Update article content
+  // @ts-ignore
   announcement.value.content = editorContentDelta.value;
 
   const res = await $api.articles.updateAnnouncement(announcement.value.id, announcement.value.image_url, announcement.value.title, announcement.value.summary, announcement.value.content, announcement.value.flags, token.value!);
@@ -449,14 +445,9 @@ function deleteArticle() {
       </span>
     </div>
     <ClientOnly>
-      <quill-editor
-          v-model:content="editorContentDelta"
-          :modules="modules"
+      <div
+          id="editor"
           class="!rounded-b-md"
-          content-type="delta"
-          theme="snow"
-          toolbar="#toolbar-container"
-          @ready="editorReady"
       />
     </ClientOnly>
 

@@ -1,19 +1,7 @@
 <script lang="ts" setup>
 import {CalendarIcon, NewspaperIcon} from "@heroicons/vue/20/solid";
-
-let BlotFormatter: any;
-let Delta: any;
-
-// Only import these modules on client side
-if (process.client) {
-  const blotFormatterModule = await import('quill-blot-formatter');
-  BlotFormatter = blotFormatterModule.default;
-
-  const deltaModule = await import('quill-delta');
-  Delta = deltaModule.default;
-
-  await import('quill-image-uploader/dist/quill.imageUploader.min.css');
-}
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
 
 function error404() {
   return createError({
@@ -61,28 +49,30 @@ useHead({
   ],
 });
 
-const modules = [
-  {
-    name: 'blotFormatter',
-    module: BlotFormatter,
-    options: {}
-  },
-];
+onMounted(async () => {
+  // Only import these modules on client side
+  if (process.client) {
+    await import('quill-image-uploader/dist/quill.imageUploader.min.css');
+
+    const Quill = (await import("quill")).default;
+    // @ts-ignore
+    const BlotFormatter = (await import('quill-blot-formatter-mobile/dist/BlotFormatter')).default;
+    const Delta = Quill.import('delta');
+
+    Quill.register('modules/blotFormatter', BlotFormatter);
+
+    const quill = new Quill("#editor", {
+      theme: "snow",
+      modules: {
+        toolbar: false,
+        blotFormatter: {},
+      }
+    });
+    quill.setContents(new Delta(news.content));
+  }
+});
 
 const articleCreatedDate = formatArticleDate(news.created_at);
-const editorContentDelta = ref(null);
-
-function editorReady() {
-  console.log("Editor ready!");
-
-  const toolbar = document.querySelector(".ql-toolbar");
-  if (toolbar) {
-    toolbar.remove();
-  }
-
-  // @ts-ignore
-  editorContentDelta.value = new Delta(news.content);
-}
 </script>
 
 <template>
@@ -107,14 +97,9 @@ function editorReady() {
       <div class="mt-8">
         <p class="text-lg leading-8 text-gray-900 dark:text-gray-400">
           <ClientOnly>
-            <quill-editor
-                v-model:content="editorContentDelta"
-                :modules="modules"
+            <div
+                id="editor"
                 class="!rounded-b-md !border-none"
-                content-type="delta"
-                theme="snow"
-                :toolbar="[]"
-                @ready="editorReady"
             />
           </ClientOnly>
         </p>

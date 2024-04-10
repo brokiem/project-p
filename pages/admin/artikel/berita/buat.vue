@@ -1,26 +1,11 @@
 <script lang="ts" setup>
+import type Delta from "quill-delta";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+
 definePageMeta({
   middleware: ["auth"],
 });
-
-let BlotFormatter: any;
-let ImageUploader: any;
-let Delta: any;
-
-// Only import these modules on client side
-if (process.client) {
-  const blotFormatterModule = await import('quill-blot-formatter');
-  BlotFormatter = blotFormatterModule.default;
-
-  const deltaModule = await import('quill-delta');
-  Delta = deltaModule.default;
-
-  // @ts-ignore
-  const imageUploaderModule = await import('quill-image-uploader');
-  ImageUploader = imageUploaderModule.default;
-
-  await import('quill-image-uploader/dist/quill.imageUploader.min.css');
-}
 
 // Fetch article data
 const {$api, $swal} = useNuxtApp();
@@ -35,29 +20,42 @@ const news = ref({
   type: ArticleType.NEWS,
 });
 
-const modules = [
-  {
-    name: 'blotFormatter',
-    module: BlotFormatter,
-    options: {}
-  },
-  {
-    name: 'imageUploader',
-    module: ImageUploader,
-    options: {
-      upload: (file: File) => {
-        return uploadImage(file);
-      }
-    }
-  },
-];
-
 const imageHeaderNeedsUpdate = ref(false);
-const editorContentDelta = ref(null);
+const editorContentDelta = ref<Delta>();
 
-function editorReady() {
-  console.log("Editor ready!");
-}
+onMounted(async () => {
+  // Only import these modules on client side
+  if (process.client) {
+    await import('quill-image-uploader/dist/quill.imageUploader.min.css');
+
+    const Quill = (await import("quill")).default;
+    // @ts-ignore
+    const BlotFormatter = (await import('quill-blot-formatter-mobile/dist/BlotFormatter')).default;
+    // @ts-ignore
+    const ImageUploader = (await import('quill-image-uploader/src/quill.imageUploader')).default;
+    const Delta = Quill.import('delta');
+
+    Quill.register('modules/blotFormatter', BlotFormatter);
+    Quill.register('modules/imageUploader', ImageUploader);
+
+    const quill = new Quill("#editor", {
+      theme: "snow",
+      modules: {
+        toolbar: "#toolbar-container",
+        blotFormatter: {},
+        imageUploader: {
+          upload: (file: File) => {
+            return uploadImage(file);
+          }
+        }
+      }
+    });
+    quill.on('text-change', (_) => {
+      editorContentDelta.value = quill.getContents();
+    });
+    quill.setContents(new Delta(news.value.content));
+  }
+});
 
 async function publishArticle() {
   // @ts-ignore
@@ -109,6 +107,7 @@ async function publishArticle() {
   }
 
   // Update article content
+  // @ts-ignore
   news.value.content = editorContentDelta.value;
   news.value.flags = ArticleFlags.IS_PUBLISHED;
 
@@ -190,6 +189,7 @@ async function draftArticle() {
   }
 
   // Update article content
+  // @ts-ignore
   news.value.content = editorContentDelta.value;
   news.value.flags = ArticleFlags.IS_DRAFT;
 
@@ -334,14 +334,9 @@ function uploadImage(file: File): Promise<string> {
       </span>
     </div>
     <ClientOnly>
-      <quill-editor
-          v-model:content="editorContentDelta"
-          :modules="modules"
+      <div
+          id="editor"
           class="!rounded-b-md"
-          content-type="delta"
-          theme="snow"
-          toolbar="#toolbar-container"
-          @ready="editorReady"
       />
     </ClientOnly>
 

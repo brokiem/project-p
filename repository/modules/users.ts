@@ -22,6 +22,18 @@ class UsersModule extends HttpFactory {
         });
     }
 
+    async searchUsers(query: string, token: string): Promise<{ success: boolean, message: { users: User[]; }, error: string }> {
+        const url = new URL(`${this.ROUTE}/search`);
+        url.searchParams.set("query", encodeURIComponent(query));
+
+        return this.request(url.toString(), {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+    }
+
     async createUser(userInput: { username: string; permissions: number; roles: number; email: string; password: string; }, token: string): Promise<{ success: boolean, message: { user: User; }, error: string }> {
         return this.request(`${this.ROUTE}`, {
             method: "POST",

@@ -19,6 +19,9 @@ export default defineEventHandler(async (event) => {
 
         const userProfile = await prisma.user_profiles.findFirst({
             where: { user_uuid: uuid },
+            include: {
+                users: true,
+            },
         });
 
         if (!userProfile) return notFoundResponse("User not found");

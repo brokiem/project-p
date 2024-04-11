@@ -34,14 +34,20 @@ class UsersModule extends HttpFactory {
         });
     }
 
-    async createUser(userInput: { username: string; permissions: number; roles: number; email: string; password: string; }, token: string): Promise<{ success: boolean, message: { user: User; }, error: string }> {
+    async createUser(username: string, email: string, password: string, permissions: number, roles: number, token: string): Promise<{ success: boolean, message: { user: User; }, error: string }> {
         return this.request(`${this.ROUTE}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`,
             },
-            body: JSON.stringify(userInput),
+            body: JSON.stringify({
+                username,
+                email,
+                password,
+                permissions,
+                roles,
+            }),
         });
     }
 

@@ -1,8 +1,11 @@
 <script setup lang="ts">
 useHead({
-  title: 'Profil - SMK Negeri 2 Tabanan',
+  title: "Profil - SMK Negeri 2 Tabanan",
   meta: [
-    { name: 'description', content: 'Terwujudnya peserta didik yang terdidik, cerdas, terampil, mandiri dan berdaya saing global' }
+    {
+      name: "description",
+      content: "Terwujudnya peserta didik yang terdidik, cerdas, terampil, mandiri dan berdaya saing global",
+    },
   ],
 });
 </script>

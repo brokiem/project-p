@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model articles {
+  id          Int           @id @default(autoincrement())
+  image_url   String        @db.Text
+  title       String        @db.VarChar(60)
+  summary     String        @db.VarChar(135)
+  content     Json          @db.Json
+  author_uuid String        @db.VarChar(36)
+  created_at  DateTime      @default(now()) @db.DateTime(0)
+  updated_at  DateTime?     @db.DateTime(0)
+  type        articles_type
+  flags       Int
+  users       user_profiles @relation(fields: [author_uuid], references: [user_uuid], onUpdate: Cascade, onDelete: Cascade, map: "articles_ibfk_1")
+
+  @@index([author_uuid], map: "author_uuid")
+}
+
+model extracurricular_mentors {
+  id                 Int              @id @default(autoincrement())
+  mentor_uuid        String           @db.VarChar(36)
+  extracurricular_id Int
+  extracurriculars   extracurriculars @relation(fields: [extracurricular_id], references: [id], onUpdate: Cascade, onDelete: Cascade, map: "extracurricular_mentors_ibfk_1")
+  users              user_profiles    @relation(fields: [mentor_uuid], references: [user_uuid], onUpdate: Cascade, onDelete: Cascade, map: "extracurricular_mentors_ibfk_2")
+
+  @@index([extracurricular_id], map: "extracurricular_id")
+  @@index([mentor_uuid], map: "mentor_uuid")
+}
+
+model extracurriculars {
+  id                      Int                       @id @default(autoincrement())
+  title                   String                    @db.VarChar(64)
+  description             String                    @db.Text
+  extracurricular_mentors extracurricular_mentors[]
+}
+
+model users_credentials {
+  uuid          String          @id @db.VarChar(36)
+  email         String          @unique @db.VarChar(320)
+  password_hash String          @db.VarChar(60)
+  user_profiles user_profiles[]
+}
+
+model competencies {
+  id          Int    @id @default(autoincrement())
+  title       String @db.VarChar(32)
+  description String @db.VarChar(255)
+}
+
+model user_profiles {
+  user_uuid               String                    @unique @db.VarChar(36)
+  username                String                    @db.VarChar(64)
+  permissions             Int
+  roles                   Int
+  users                   users_credentials         @relation(fields: [user_uuid], references: [uuid], onUpdate: Cascade, onDelete: Cascade, map: "user_attributes_ibfk_1")
+  articles                articles[]
+  extracurricular_mentors extracurricular_mentors[]
+
+  @@index([user_uuid], map: "user_uuid")
+}
+
+enum articles_type {
+  NEWS
+  ANNOUNCEMENT
+}

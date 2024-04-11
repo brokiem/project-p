@@ -4,13 +4,13 @@
 
 <template>
   <!-- Navbar default layout -->
-  <Navbar />
+  <Navbar/>
 
   <!-- Page -->
-  <slot />
+  <slot/>
 
   <!-- Footer default layout -->
-  <LazyFooter />
+  <LazyFooter/>
 </template>
 
 <style scoped>

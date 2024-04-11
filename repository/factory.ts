@@ -15,14 +15,14 @@ class HttpFactory {
                 if (result.success) {
                     resolve(result);
                 } else {
-                    reject(result);
+                    resolve(result);
                 }
             } catch (e: any) {
                 const error = {
                     success: false,
-                    error: e.message,
+                    error: e.toString(),
                 };
-                reject(error);
+                resolve(error as any);
             }
         });
     }

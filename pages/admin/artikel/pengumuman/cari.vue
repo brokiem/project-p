@@ -47,7 +47,7 @@ const searchArticle = async () => {
           <h2 class="mb-1.5 text-3xl tracking-tight font-medium text-gray-900 dark:text-white">
             Pengumuman
           </h2>
-          <h3 class="mb-3">Menampilkan 20 hasil pencarian teratas untuk "{{ finalSearchValue }}"</h3>
+          <h3 class="mb-3">Menampilkan 20 hasil pencarian teratas untuk kaca kunci "{{ finalSearchValue }}"</h3>
         </div>
 
         <!-- Search input -->

@@ -45,6 +45,29 @@ class UsersModule extends HttpFactory {
         });
     }
 
+    async updateUser(uuid: string, username: string, email: string, permissions: number, roles: number, token: string, password?: string | null): Promise<{ success: boolean, message: { user: User; }, error: string }> {
+        const input = {
+            username,
+            email,
+            permissions,
+            roles,
+            password,
+        };
+
+        if (!password) {
+            delete input.password;
+        }
+
+        return this.request(`${this.ROUTE}/${uuid}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify(input),
+        });
+    }
+
     async deleteUser(uuid: string, token: string): Promise<{ success: boolean, message: { message: string; }, error: string }> {
         return this.request(`${this.ROUTE}/${uuid}`, {
             method: "DELETE",

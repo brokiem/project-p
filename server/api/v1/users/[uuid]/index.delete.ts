@@ -19,14 +19,15 @@ export default defineEventHandler(async (event) => {
 
         const userToDelete = await prisma.users_credentials.findFirst({
             where: { uuid },
+            include: { user_profiles: true },
         });
 
         if (!userToDelete) return notFoundResponse("User not found");
 
-        // Delete user from user_profiles table
-        await prisma.user_profiles.deleteMany({
-            where: { user_uuid: uuid },
-        });
+        // Prevent deleting user if its admin
+        if ((userToDelete.user_profiles[0].permissions & Permissions.ADMINISTRATOR) === Permissions.ADMINISTRATOR) {
+            return forbiddenResponse("You cannot delete an admin user!");
+        }
 
         // Delete user from users_credentials table
         await prisma.users_credentials.delete({

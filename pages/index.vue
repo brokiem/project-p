@@ -30,7 +30,7 @@ try {
     <!-- Header section -->
     <div class="relative">
       <!-- Front page image header -->
-      <NuxtImg class="w-full h-[99vh] object-cover" src="/atas-blur-min.webp" alt="Atas SMK DUTA"/>
+      <NuxtPicture preload class="w-full h-[99vh] object-cover" src="/atas-blur-min.webp" alt="Atas SMK DUTA"/>
 
       <!-- Card header -->
       <div

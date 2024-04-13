@@ -12,7 +12,7 @@ useHead({
 const competencies: Ref<{ id: number, title: string, description: string }[]> = ref([]);
 
 async function loadCompetencies() {
-  const { $api } = useNuxtApp();
+  const {$api} = useNuxtApp();
   const {message} = await $api.competencies.getAll();
 
   competencies.value = message.competencies;
@@ -30,7 +30,7 @@ try {
     <!-- Header section -->
     <div class="relative">
       <!-- Front page image header -->
-      <NuxtPicture preload class="w-full h-[99vh] object-cover" src="/atas-blur-min.webp" alt="Atas SMK DUTA"/>
+      <NuxtPicture preload :imgAttrs="{class:'w-full h-[99vh] object-cover'}" src="/atas-blur-min.webp" alt="Atas SMK DUTA"/>
 
       <!-- Card header -->
       <div

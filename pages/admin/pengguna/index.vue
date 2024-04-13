@@ -57,8 +57,8 @@ async function searchUser() {
           <div class="mb-4">
             <p class="mb-1">Silahkan cari pengguna untuk memulai.</p>
             <div class="flex flex-row">
-              <form @submit.prevent="searchUser">
-                <input v-model="searchInput" class="border-2 border-gray-300 bg-white h-10 px-3 w-80 rounded-md text-sm focus:outline-none"
+              <form autocomplete="off" @submit.prevent="searchUser">
+                <input autocomplete="off" v-model="searchInput" class="border-2 border-gray-300 bg-white h-10 px-3 w-80 rounded-md text-sm focus:outline-none"
                        type="search" name="search" placeholder="Cari pengguna" required>
               </form>
 

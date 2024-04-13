@@ -8,7 +8,7 @@ export default defineNuxtConfig({
         },
     },
     routeRules: {
-        "/": { isr: 86400 },
+        "/": { prerender: true },
         "/profil/fasilitas": { prerender: true },
         "/profil/logo": { prerender: true },
         "/profil/sejarah": { prerender: true },
@@ -16,6 +16,7 @@ export default defineNuxtConfig({
         "/profil/visi-misi": { prerender: true },
         "/kesiswaan/tatatertib": { prerender: true },
         "/kesiswaan/ekstrakurikuler": { isr: 86400 },
+        "/:pathMatch(.*)*": { prerender: true },
     },
     runtimeConfig: {
         jwtSecretKey: process.env.JWT_SECRET_KEY,

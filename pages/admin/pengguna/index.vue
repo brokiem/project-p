@@ -20,10 +20,12 @@ const token = useCookie("token");
 
 const searchInput = ref("");
 const users = ref<User[]>([]);
+const isSearched = ref(false);
 
 async function searchUser() {
   const {message} = await $api.users.searchUsers(searchInput.value!, token.value!);
   users.value = message.users;
+  isSearched.value = true;
 }
 </script>
 
@@ -71,6 +73,8 @@ async function searchUser() {
                   </div>
                 </li>
               </ul>
+
+              <p v-if="isSearched && users.length === 0" class="mt-4 font-medium text-lg">Tidak ada pengguna yang ditemukan dengan kata kunci tersebut.</p>
             </div>
           </div>
         </div>

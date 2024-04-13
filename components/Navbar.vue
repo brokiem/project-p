@@ -12,7 +12,7 @@ export default defineComponent({
   <!-- First navbar -->
   <nav class="px-2 sm:px-4 pb-2.5 pt-3 gradient-navbar">
     <div class="container flex flex-wrap items-center justify-center mx-auto">
-      <NuxtImg src="/logo-smk2.png" width="50" height="50" alt="Logo SMK"/>
+      <NuxtImg preload src="/logo-smk2.png" format="webp" width="50" height="50" alt="Logo SMK"/>
     </div>
     <div class="container flex flex-wrap items-center justify-center mx-auto">
       <h6 class="text-xl font-bold mt-1 text-white">SMK NEGERI 2 TABANAN</h6>

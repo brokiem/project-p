@@ -64,7 +64,6 @@ const searchArticle = async () => {
         <ArticlesContainer
             :display-announcements="true"
             :number-of-announcements-to-display="20"
-            :search-value="finalSearchValue"
             class="mb-8"
         />
       </div>

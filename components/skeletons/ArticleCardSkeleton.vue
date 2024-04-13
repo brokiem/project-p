@@ -32,16 +32,6 @@ export default defineComponent({
   </div>
 </template>
 
-<style scoped>
-.animate-shine {
-  background: linear-gradient(110deg, #D1D5DB 8%, #e3e3e3 18%, #D1D5DB 33%);
-  background-size: 200% 100%;
-  animation: 1.2s shine linear infinite;
-}
+<style>
 
-@keyframes shine {
-  to {
-    background-position-x: -200%;
-  }
-}
 </style>

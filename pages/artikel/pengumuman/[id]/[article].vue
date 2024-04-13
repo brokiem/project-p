@@ -25,6 +25,7 @@ const {$api} = useNuxtApp();
 const token = useCookie("token");
 const {message: articleResponse} = await $api.articles.getAnnouncementById(articleId, token.value!);
 const announcement = articleResponse.announcement;
+const isArticleLoaded = ref(false);
 
 // Check if article exists
 if (!announcement) {
@@ -69,6 +70,8 @@ onMounted(async () => {
       }
     });
     quill.setContents(new Delta(announcement.content));
+
+    isArticleLoaded.value = true;
   }
 });
 
@@ -95,6 +98,32 @@ const articleCreatedDate = formatArticleDate(announcement.created_at);
       </div>
 
       <div class="mt-8">
+        <div v-if="!isArticleLoaded" class="pt-1">
+          <div class="space-y-4">
+            <div class="animate-shine animate-shine h-4 bg-gray-300 rounded w-2/3"></div>
+            <div class="animate-shine h-4 bg-gray-300 rounded"></div>
+            <div class="animate-shine h-4 bg-gray-300 rounded"></div>
+            <div class="animate-shine h-4 bg-gray-300 rounded w-1/2"></div>
+            <div class="animate-shine h-4 bg-gray-300 rounded"></div>
+            <div class="animate-shine h-4 bg-gray-300 rounded w-3/4"></div>
+          </div>
+
+          <div class="space-y-4 mt-12">
+            <div class="animate-shine h-4 bg-gray-300 rounded w-2/3"></div>
+            <div class="animate-shine h-4 bg-gray-300 rounded"></div>
+            <div class="animate-shine h-4 bg-gray-300 rounded w-1/2"></div>
+            <div class="animate-shine h-4 bg-gray-300 rounded"></div>
+            <div class="animate-shine h-4 bg-gray-300 rounded"></div>
+          </div>
+
+          <div class="space-y-4 mt-12">
+            <div class="animate-shine h-4 bg-gray-300 rounded w-2/3"></div>
+            <div class="animate-shine h-4 bg-gray-300 rounded"></div>
+            <div class="animate-shine h-4 bg-gray-300 rounded"></div>
+            <div class="animate-shine h-4 bg-gray-300 rounded w-1/2"></div>
+          </div>
+        </div>
+
         <p class="text-lg leading-8 text-gray-900 dark:text-gray-400">
           <ClientOnly>
             <div

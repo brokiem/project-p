@@ -33,7 +33,7 @@ function logout() {
         $swal.hideLoading();
       },
     });
-  }, 500);
+  }, 300);
 }
 
 async function submit() {

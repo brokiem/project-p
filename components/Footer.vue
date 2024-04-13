@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EnvelopeIcon, MapPinIcon, PhoneIcon } from "@heroicons/vue/20/solid";
+import {EnvelopeIcon, MapPinIcon, PhoneIcon} from "@heroicons/vue/20/solid";
 import FacebookIcon from "~/components/icons/FacebookIcon.vue";
 import InstagramIcon from "~/components/icons/InstagramIcon.vue";
 import YouTubeIcon from "~/components/icons/YouTubeIcon.vue";
@@ -34,10 +34,10 @@ import YouTubeIcon from "~/components/icons/YouTubeIcon.vue";
             <!-- Email -->
             <div class="flex flex-wrap">
               <!-- Email icon -->
-              <a href="mailto:smkn2tabanan@ymail.com" class="text-gray-700 ml-4 mt-2">
+              <NuxtLink href="mailto:smkn2tabanan@ymail.com" class="text-gray-700 ml-4 mt-2">
                 <EnvelopeIcon class="w-5 h-5 inline top-[-2px] mr-1"/>
                 smkn2tabanan@ymail.com
-              </a>
+              </NuxtLink>
             </div>
           </div>
           <!-- Google Maps iframe -->
@@ -66,21 +66,21 @@ import YouTubeIcon from "~/components/icons/YouTubeIcon.vue";
           </span>
 
           <div class="flex mt-4 space-x-6 justify-center sm:mt-0">
-            <a href="https://www.facebook.com/DutaSMK/"
+            <NuxtLink href="https://www.facebook.com/DutaSMK/"
                class="text-gray-500 hover:text-gray-900 dark:hover:text-white transition duration-200">
               <FacebookIcon class="w-5 h-5 inline top-[-2px] mr-1"/>
               <span class="sr-only">Facebook page</span>
-            </a>
-            <a href="https://www.instagram.com/osisdutasmk/"
+            </NuxtLink>
+            <NuxtLink href="https://www.instagram.com/osisdutasmk/"
                class="text-gray-500 hover:text-gray-900 dark:hover:text-white transition duration-200">
               <InstagramIcon class="w-5 h-5 inline top-[-2px] mr-1"/>
               <span class="sr-only">Instagram page</span>
-            </a>
-            <a href="https://www.youtube.com/channel/UCFGz3a0jUv7PxB1vHJ-Hkbg?sub_confirmation=1"
+            </NuxtLink>
+            <NuxtLink href="https://www.youtube.com/channel/UCFGz3a0jUv7PxB1vHJ-Hkbg?sub_confirmation=1"
                class="text-gray-500 hover:text-gray-900 dark:hover:text-white transition duration-200">
               <YouTubeIcon class="w-5 h-5 inline top-[-2px] mr-1"/>
               <span class="sr-only">YouTube page</span>
-            </a>
+            </NuxtLink>
           </div>
         </div>
       </div>

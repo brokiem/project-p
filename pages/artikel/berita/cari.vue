@@ -29,6 +29,7 @@ const finalSearchValue = ref(searchQuery);
 const searchArticle = async () => {
   if (searchValue.value) {
     await router.push(`/artikel/berita/cari?q=${encodeURIComponent(searchValue.value)}`);
+    finalSearchValue.value = searchValue.value;
   }
 };
 </script>

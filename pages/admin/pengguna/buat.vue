@@ -95,7 +95,6 @@ async function updateUser() {
       title: "Berhasil",
       text: "Pengguna berhasil dibuat",
       icon: "success",
-      showConfirmButton: false,
       timer: 3000,
       timerProgressBar: true,
     }).then(async () => {

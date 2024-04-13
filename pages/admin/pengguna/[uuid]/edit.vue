@@ -118,7 +118,6 @@ async function updateUser() {
           title: "Berhasil",
           text: "Pengguna berhasil diperbarui",
           icon: "success",
-          showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
         });

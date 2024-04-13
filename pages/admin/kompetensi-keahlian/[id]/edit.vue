@@ -50,7 +50,6 @@ async function editCompetency() {
       title: "Data tidak valid",
       text: "Judul dan deskripsi kompetensi keahlian tidak boleh kosong",
       icon: "error",
-      showConfirmButton: false,
     });
     return;
   }
@@ -84,8 +83,7 @@ async function editCompetency() {
         $swal.fire({
           title: "Berhasil memperbarui kompetensi keahlian",
           icon: "success",
-          showConfirmButton: false,
-          timer: 1500,
+          timer: 3000,
         }).then(() => {
           loadCompetency();
         });
@@ -94,7 +92,6 @@ async function editCompetency() {
         $swal.fire({
           title: "Gagal memperbarui kompetensi keahlian",
           icon: "error",
-          showConfirmButton: false,
         });
       }
     }

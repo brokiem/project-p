@@ -22,7 +22,6 @@ async function createCompetency() {
       title: "Data tidak valid",
       text: "Judul dan deskripsi kompetensi keahlian tidak boleh kosong",
       icon: "error",
-      showConfirmButton: false,
     });
     return;
   }
@@ -45,8 +44,7 @@ async function createCompetency() {
     $swal.fire({
       title: "Berhasil membuat kompetensi keahlian",
       icon: "success",
-      showConfirmButton: false,
-      timer: 1500,
+      timer: 3000,
     }).then(async () => {
       await navigateTo('/admin/kompetensi-keahlian');
     });
@@ -55,7 +53,6 @@ async function createCompetency() {
     $swal.fire({
       title: "Gagal membuat kompetensi keahlian",
       icon: "error",
-      showConfirmButton: false,
     });
   }
 }

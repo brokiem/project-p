@@ -25,9 +25,8 @@ function logout() {
     $swal.fire({
       title: "Berhasil keluar",
       icon: "success",
-      timer: 2000,
+      timer: 3000,
       timerProgressBar: true,
-      showConfirmButton: true,
       didOpen: () => {
         // @ts-ignore
         $swal.hideLoading();
@@ -62,7 +61,7 @@ async function submit() {
     $swal.fire({
       title: "Login berhasil",
       icon: "success",
-      timer: 2000,
+      timer: 3000,
       timerProgressBar: true,
       showConfirmButton: true,
     });
@@ -74,9 +73,7 @@ async function submit() {
       title: "Login gagal",
       text: "Email atau kata sandi salah",
       icon: "error",
-      timer: 2000,
       timerProgressBar: true,
-      showConfirmButton: true,
     });
   }
 }

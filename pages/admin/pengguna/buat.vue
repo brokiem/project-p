@@ -117,7 +117,7 @@ async function updateUser() {
            class="rounded-md transition duration-50 block w-full p-2 mb-4 text-sm text-gray-900 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
            placeholder="Username"
            required type="text"
-           autocomplete="off"/>
+           autocapitalize="off" autocomplete="new-password" autocorrect="off" autofocus="" spellcheck="false"/>
 
     <!-- Pengguna email input -->
     <label class="mb-2 text-sm text-gray-900" for="user-email">
@@ -127,7 +127,7 @@ async function updateUser() {
            class="rounded-md transition duration-50 block w-full p-2 mb-4 text-sm text-gray-900 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
            placeholder="Email"
            required type="text"
-           autocomplete="off"/>
+           autocapitalize="off" autocomplete="new-password" autocorrect="off" autofocus="" spellcheck="false"/>
 
     <!-- Pengguna password input -->
     <label class="mb-2 text-sm text-gray-900" for="user-pass">
@@ -137,7 +137,7 @@ async function updateUser() {
            class="rounded-md transition duration-50 block w-full p-2 mb-4 text-sm text-gray-900 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
            placeholder="Password"
            required type="password"
-           autocomplete="off"/>
+           autocapitalize="off" autocomplete="new-password" autocorrect="off" autofocus="" spellcheck="false"/>
 
     <!-- Pengguna permissions input -->
     <p class="mb-2 text-sm text-gray-900">

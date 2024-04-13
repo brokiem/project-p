@@ -22,7 +22,6 @@ export default defineNuxtConfig({
         "/artikel/pengumuman/cari": { prerender: true },
         "/admin": { prerender: true },
         "/admin/dash": { prerender: true },
-        "*": { prerender: true },
     },
     runtimeConfig: {
         jwtSecretKey: process.env.JWT_SECRET_KEY,

@@ -61,23 +61,23 @@ import YouTubeIcon from "~/components/icons/YouTubeIcon.vue";
     <div class="p-4 bg-white sm:p-6 dark:bg-gray-900 bottom-0 w-full" style="background-color: #f5f5f5;">
       <div class="container mx-auto">
         <div class="sm:flex items-center sm:justify-between px-10 mx-auto md:max-w-screen-xl">
-          <span class="text-sm text-gray-500 sm:text-center flex justify-center dark:text-gray-400">
-            © {{ new Date().getFullYear() }} - TIK SMK DUTA | All Rights Reserved.
+          <span class="text-sm text-gray-600 sm:text-center flex justify-center dark:text-gray-400">
+            © {{ new Date().getFullYear() }} - SMK Negeri 2 Tabanan - All rights reserved
           </span>
 
           <div class="flex mt-4 space-x-6 justify-center sm:mt-0">
             <NuxtLink href="https://www.facebook.com/DutaSMK/"
-               class="text-gray-500 hover:text-gray-900 dark:hover:text-white transition duration-200">
+                      class="text-gray-600 hover:text-gray-900 dark:hover:text-white transition duration-200">
               <FacebookIcon class="w-5 h-5 inline top-[-2px] mr-1"/>
               <span class="sr-only">Facebook page</span>
             </NuxtLink>
             <NuxtLink href="https://www.instagram.com/osisdutasmk/"
-               class="text-gray-500 hover:text-gray-900 dark:hover:text-white transition duration-200">
+                      class="text-gray-600 hover:text-gray-900 dark:hover:text-white transition duration-200">
               <InstagramIcon class="w-5 h-5 inline top-[-2px] mr-1"/>
               <span class="sr-only">Instagram page</span>
             </NuxtLink>
             <NuxtLink href="https://www.youtube.com/channel/UCFGz3a0jUv7PxB1vHJ-Hkbg?sub_confirmation=1"
-               class="text-gray-500 hover:text-gray-900 dark:hover:text-white transition duration-200">
+                      class="text-gray-600 hover:text-gray-900 dark:hover:text-white transition duration-200">
               <YouTubeIcon class="w-5 h-5 inline top-[-2px] mr-1"/>
               <span class="sr-only">YouTube page</span>
             </NuxtLink>

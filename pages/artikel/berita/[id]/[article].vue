@@ -34,10 +34,9 @@ if (!news) {
 }
 
 // Change url to include article title
-const router = useRouter();
 const encodedArticleTitle = encodeArticleTitle(news.title);
 if (article !== encodedArticleTitle) {
-  router.replace(formatArticleUrl(news.type, news.title, news.id));
+  await navigateTo(formatArticleUrl(news.type, news.title, news.id));
 }
 
 useHead({

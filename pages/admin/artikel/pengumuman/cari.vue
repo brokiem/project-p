@@ -5,13 +5,12 @@ definePageMeta({
 
 import {MagnifyingGlassIcon} from "@heroicons/vue/20/solid";
 
-const router = useRouter();
 const route = useRoute();
 const searchQuery = route.query.q as string;
 
 // Redirect to home if no search query
 if (!searchQuery) {
-  router.replace("/");
+  await navigateTo("/artikel/pengumuman/page/1");
 }
 
 useHead({

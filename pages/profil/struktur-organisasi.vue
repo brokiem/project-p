@@ -17,7 +17,7 @@ useHead({
 
     <div class="container mx-auto px-4 md:max-w-default">
       <div class="flex justify-center">
-        <img src="/struktur-organisasi.png" width="862" height="644" alt="Struktur organisasi">
+        <NuxtImg src="/struktur-organisasi.png" width="862" height="644" alt="Struktur organisasi"/>
       </div>
     </div>
   </div>

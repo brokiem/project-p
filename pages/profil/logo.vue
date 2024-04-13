@@ -20,7 +20,7 @@ useHead({
       <div
           class="flex justify-center w-full p-6 bg-white items-center border rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
         <!-- Card contents -->
-        <img src="/logo-smk2.png" class="h-[200px] w-[200px]" alt="Logo SMK"/>
+        <NuxtImg src="/logo-smk2.png" width="200" height="200" class="h-[200px] w-[200px]"/>
       </div>
 
       <div class="py-2"></div>

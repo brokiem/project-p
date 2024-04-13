@@ -381,7 +381,7 @@ function deleteArticle() {
     <input id="file_input" accept="image/*" class="mb-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" @change="updatePreview">
 
     <!-- Preview uploaded image -->
-    <img v-if="announcement.image_url !== ''" id="preview-img" :src="announcement.image_url" alt="Article header image" class="mb-4 rounded-md aspect-video w-full object-contain" style="background-color: #d0d1d3;">
+    <img v-if="announcement.image_url !== ''" id="preview-img" :src="announcement.image_url" class="mb-4 rounded-md aspect-video w-full object-contain bg-[#d0d1d3]"/>
 
     <!-- Article title input -->
     <label class="mb-2 text-sm text-gray-900" for="article-title">

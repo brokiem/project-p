@@ -41,20 +41,12 @@ export default defineComponent({
     async loadAnnouncements() {
       const {$api} = useNuxtApp();
       const token = useCookie("token");
-      const {message} = await $api.articles.getAnnouncements(this.announcementsStartingIndex, this.numberOfAnnouncementsToDisplay, token.value!);
-      const {announcements} = message;
-
-      // @ts-ignore
-      this.announcements = announcements;
+      return $api.articles.getAnnouncements(this.announcementsStartingIndex, this.numberOfAnnouncementsToDisplay, token.value!);
     },
     async loadNews() {
       const {$api} = useNuxtApp();
       const token = useCookie("token");
-      const {message} = await $api.articles.getNews(this.newsStartingIndex, this.numberOfNewsToDisplay, token.value!);
-      const {news} = message;
-
-      // @ts-ignore
-      this.news = news;
+      return $api.articles.getNews(this.newsStartingIndex, this.numberOfNewsToDisplay, token.value!);
     },
   },
   async created() {
@@ -69,8 +61,24 @@ export default defineComponent({
     }
 
     try {
-      // Load articles in pararell
-      await Promise.all(loadArticlePromises);
+      // Load articles in parallel
+      const results = await Promise.all(loadArticlePromises);
+
+      if (results.length === 1) {
+        if (this.displayAnnouncements && this.numberOfAnnouncementsToDisplay > 0) {
+          // @ts-ignore
+          this.announcements = results[0].message.announcements;
+        } else if (this.displayNews && this.numberOfNewsToDisplay > 0) {
+          // @ts-ignore
+          this.news = results[0].message.news;
+        }
+      } else if (results.length === 2) {
+        // @ts-ignore
+        this.announcements = results[0].message.announcements;
+        // @ts-ignore
+        this.news = results[1].message.news;
+      }
+
       this.isLoading = false;
     } catch (e) {
       console.log(e);

@@ -14,6 +14,7 @@ test("AdminArticlesContainer", async () => {
             displayAnnouncements: true,
             announcementsStartingIndex: 0,
             numberOfAnnouncementsToDisplay: 3,
+            searchValue: null,
         },
     });
 
@@ -32,4 +33,5 @@ test("AdminArticlesContainer", async () => {
     expect(wrapper.vm.displayAnnouncements).toBe(true);
     expect(wrapper.vm.announcementsStartingIndex).toBe(0);
     expect(wrapper.vm.numberOfAnnouncementsToDisplay).toBe(3);
+    expect(wrapper.vm.searchValue).toBe(null);
 });

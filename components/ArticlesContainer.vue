@@ -29,6 +29,10 @@ export default defineComponent({
       type: Number,
       default: 3
     },
+    searchValue: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     return {
@@ -48,16 +52,42 @@ export default defineComponent({
       const token = useCookie("token");
       return $api.articles.getNews(this.newsStartingIndex, this.numberOfNewsToDisplay, token.value!);
     },
+    async searchAnnouncements(query: string) {
+      const {$api} = useNuxtApp();
+      const token = useCookie("token");
+      const {message} = await $api.articles.searchAnnouncements(query, token.value!);
+      const {announcements} = message;
+
+      // @ts-ignore
+      this.announcements = announcements;
+    },
+    async searchNews(query: string) {
+      const {$api} = useNuxtApp();
+      const token = useCookie("token");
+      const {message} = await $api.articles.searchNews(query, token.value!);
+      const {news} = message;
+
+      // @ts-ignore
+      this.news = news;
+    },
   },
   async created() {
     const loadArticlePromises = [];
 
     if (this.displayAnnouncements && this.numberOfAnnouncementsToDisplay > 0) {
-      loadArticlePromises.push(this.loadAnnouncements());
+      if (!!this.searchValue) {
+        loadArticlePromises.push(this.searchAnnouncements(this.searchValue));
+      } else {
+        loadArticlePromises.push(this.loadAnnouncements());
+      }
     }
 
     if (this.displayNews && this.numberOfNewsToDisplay > 0) {
-      loadArticlePromises.push(this.loadNews());
+      if (!!this.searchValue) {
+        loadArticlePromises.push(this.searchNews(this.searchValue));
+      } else {
+        loadArticlePromises.push(this.loadNews());
+      }
     }
 
     try {
@@ -83,6 +113,32 @@ export default defineComponent({
     } catch (e) {
       console.log(e);
     }
+  },
+  watch: {
+    searchValue(newSearch) {
+      this.isLoading = true;
+
+      const loadArticlePromises = [];
+
+      if (this.displayAnnouncements && this.numberOfAnnouncementsToDisplay > 0) {
+        if (!!this.searchValue) {
+          loadArticlePromises.push(this.searchAnnouncements(newSearch));
+        }
+      }
+
+      if (this.displayNews && this.numberOfNewsToDisplay > 0) {
+        if (!!this.searchValue) {
+          loadArticlePromises.push(this.searchNews(newSearch));
+        }
+      }
+
+      // Load articles in pararell
+      Promise.all(loadArticlePromises).then(() => {
+        this.isLoading = false;
+      }).catch((e) => {
+        console.log(e);
+      });
+    },
   },
 })
 </script>

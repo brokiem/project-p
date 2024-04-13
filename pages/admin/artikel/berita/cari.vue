@@ -68,6 +68,7 @@ const searchArticle = async () => {
         <AdminArticlesContainer
             :display-news="true"
             :number-of-news-to-display="20"
+            :search-value="finalSearchValue"
             class="mb-8"
         />
       </div>

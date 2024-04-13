@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { $swal, $api } = useNuxtApp();
+const {$swal, $api} = useNuxtApp();
 const currentUser = useCurrentUser();
 const token = useCookie("token");
 const isLoggedIn = ref(currentUser.value != null);
@@ -52,7 +52,7 @@ async function submit() {
   });
 
   try {
-    const { message } = await $api.auth.login(email, password);
+    const {message} = await $api.auth.login(email, password);
 
     token.value = message.token;
     currentUser.value = message.user;
@@ -94,18 +94,20 @@ async function submit() {
             <div v-if="isLoggedIn" class="space-y-4 md:space-y-6">
               <button @click="logout" class="transition duration-150 w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Keluar</button>
             </div>
-            <div v-if="!isLoggedIn" class="space-y-4 md:space-y-6">
-              <div>
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                <input type="email" name="email" id="email" placeholder="Masukkan email"
-                       class="transition duration-150 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full py-2 px-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-              </div>
-              <div>
-                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata Sandi</label>
-                <input type="password" name="password" id="password" placeholder="Masukkan kata sandi"
-                       class="transition duration-150 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full py-2 px-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-              </div>
-              <button @click="submit" class="transition duration-150 w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 text-center">Masuk</button>
+            <div v-if="!isLoggedIn">
+              <form @submit.prevent="submit" class="space-y-4 md:space-y-6">
+                <div>
+                  <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                  <input type="email" name="email" id="email" placeholder="Masukkan email"
+                         class="transition duration-150 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full py-2 px-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                </div>
+                <div>
+                  <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata Sandi</label>
+                  <input type="password" name="password" id="password" placeholder="Masukkan kata sandi"
+                         class="transition duration-150 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full py-2 px-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                </div>
+                <button type="submit" class="transition duration-150 w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 text-center">Masuk</button>
+              </form>
             </div>
           </div>
         </div>

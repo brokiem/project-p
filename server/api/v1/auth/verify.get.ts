@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     try {
         const authorization = event.headers.get("authorization") || "";
         const token = authorization.split(" ")[1];
-        const { jwtSecretKey } = useRuntimeConfig();
+        const { jwtSecretKey } = useRuntimeConfig(event);
 
         // Verify the token, if it's invalid, it will throw an error
         // So this is always safe to use

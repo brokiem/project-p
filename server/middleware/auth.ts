@@ -12,7 +12,7 @@ export default defineEventHandler((event) => {
             return;
         }
 
-        const { jwtSecretKey } = useRuntimeConfig();
+        const { jwtSecretKey } = useRuntimeConfig(event);
         const decoded = jwt.verify(token, jwtSecretKey) as User;
 
         event.context.isAuthenticated = true;

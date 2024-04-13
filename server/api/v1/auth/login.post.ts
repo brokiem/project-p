@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
         if (!isPasswordValid) return unauthorizedResponse("Invalid password");
 
         const { user_uuid, username, permissions, roles } = userProfile;
-        const { jwtSecretKey } = useRuntimeConfig();
+        const { jwtSecretKey } = useRuntimeConfig(event);
 
         const token = jwt.sign({ uuid: user_uuid, username, email, permissions, roles }, jwtSecretKey!, {
             algorithm: "HS384",

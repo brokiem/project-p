@@ -38,6 +38,7 @@ if (!news) {
 
 const imageHeaderNeedsUpdate = ref(false);
 const editorContentDelta = ref<Delta>();
+const isDraft = ref(hasFlag(news.value.flags!, ArticleFlags.IS_DRAFT));
 
 onMounted(async () => {
   // Only import these modules on client side
@@ -246,7 +247,9 @@ async function draftArticle(value: boolean = true) {
       timer: 3000,
       timerProgressBar: true,
       showConfirmButton: true,
-    });
+    }).then(() => {
+      isDraft.value = false;
+    })
     return;
   }
 
@@ -274,7 +277,9 @@ async function draftArticle(value: boolean = true) {
     timer: 3000,
     timerProgressBar: true,
     showConfirmButton: true,
-  });
+  }).then(() => {
+    isDraft.value = true;
+  })
 }
 
 function updatePreview() {
@@ -366,8 +371,6 @@ function deleteArticle() {
     }
   })
 }
-
-const isDraft = hasFlag(news.value.flags!, ArticleFlags.IS_DRAFT);
 </script>
 
 <template>

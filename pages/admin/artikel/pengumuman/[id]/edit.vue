@@ -38,6 +38,7 @@ if (!announcement) {
 
 const imageHeaderNeedsUpdate = ref(false);
 const editorContentDelta = ref<Delta>();
+const isDraft = ref(hasFlag(announcement.value.flags!, ArticleFlags.IS_DRAFT));
 
 onMounted(async () => {
   // Only import these modules on client side
@@ -246,6 +247,8 @@ async function draftArticle(value: boolean = true) {
       timer: 3000,
       timerProgressBar: true,
       showConfirmButton: true,
+    }).then(() => {
+      isDraft.value = false;
     });
     return;
   }
@@ -274,6 +277,8 @@ async function draftArticle(value: boolean = true) {
     timer: 3000,
     timerProgressBar: true,
     showConfirmButton: true,
+  }).then(() => {
+    isDraft.value = true;
   });
 }
 
@@ -313,8 +318,6 @@ function uploadImage(file: File): Promise<string> {
     }
   });
 }
-
-const isDraft = hasFlag(announcement.value.flags!, ArticleFlags.IS_DRAFT);
 
 function deleteArticle() {
   // @ts-ignore

@@ -5,13 +5,12 @@ definePageMeta({
 
 import {MagnifyingGlassIcon} from "@heroicons/vue/20/solid";
 
-const router = useRouter();
 const route = useRoute();
 const searchQuery = route.query.q as string;
 
 // Redirect to home if no search query
 if (!searchQuery) {
-  router.replace("/");
+  await navigateTo("/admin/artikel/berita/page/1");
 }
 
 useHead({
@@ -32,8 +31,8 @@ const finalSearchValue = ref(searchQuery);
 
 const searchArticle = async () => {
   if (searchValue.value) {
-    await router.push(`/admin/artikel/berita/cari?q=${encodeURIComponent(searchValue.value)}`);
     finalSearchValue.value = searchValue.value;
+    await navigateTo(`/admin/artikel/berita/cari?q=${encodeURIComponent(searchValue.value)}`);
   }
 };
 </script>

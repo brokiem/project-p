@@ -37,7 +37,7 @@ export default defineComponent({
   <div class="flex flex-col mx-auto w-full md:max-w-3xl text-gray-900 bg-white rounded-md border border-gray-200 shadow transition duration-200">
     <!-- Card article image -->
     <div class="relative">
-      <NuxtPicture :imgAttrs="{class:'rounded-t-md h-[189px] w-full object-cover z-10'}" format="webp" height="189" densities="x1 x2" loading="lazy" :src="imageUrl" alt="Article cover image"/>
+      <NuxtPicture :imgAttrs="{class:'rounded-t-md h-[189px] w-full object-cover z-10'}" format="webp" height="189" densities="x1 x2" loading="lazy" :src="imageUrl"/>
       <!-- Card image placeholder -->
       <!-- Card image skeleton -->
       <div class="absolute top-0 left-0 rounded-t-md flex justify-center items-center w-full h-[189px] object-cover bg-gray-300 dark:bg-gray-700">

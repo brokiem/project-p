@@ -24,10 +24,9 @@ if (currentPage > totalPaginationPages) {
 
 const searchValue = ref("");
 
-const router = useRouter();
 const searchArticle = async () => {
   if (searchValue.value) {
-    await router.push(`/admin/artikel/berita/cari?q=${searchValue.value}`);
+    await navigateTo(`/admin/artikel/berita/cari?q=${searchValue.value}`);
   }
 };
 </script>

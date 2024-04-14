@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
             .webp({ quality: 85 })
             .toBuffer();
 
-        const { imageKitPublicKey, imageKitPrivateKey, imageKitUrlEndpoint } = useRuntimeConfig();
+        const { imageKitPublicKey, imageKitPrivateKey, imageKitUrlEndpoint } = useRuntimeConfig(event);
 
         const imagekit = new ImageKit({
             publicKey: imageKitPublicKey,

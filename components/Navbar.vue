@@ -9,7 +9,7 @@ onMounted(() => {
 });
 
 watch(() => route.fullPath, () => {
-  if (closeButtonEl.value !== null) {
+  if (closeButtonEl.value !== null && closeButtonEl.value.ariaExpanded === "true") {
     closeButtonEl.value.click();
   }
 });

@@ -1,10 +1,17 @@
-<script lang="ts">
-import {defineComponent} from "vue";
+<script setup lang="ts">
 import {Bars3Icon, ChevronDownIcon} from "@heroicons/vue/20/solid";
 
-export default defineComponent({
-  name: "Navbar",
-  components: {ChevronDownIcon, Bars3Icon},
+const route = useRoute();
+const closeButtonEl = ref<HTMLButtonElement | null>(null);
+
+onMounted(() => {
+  closeButtonEl.value = document.getElementById("navbarMainMenuButton") as HTMLButtonElement;
+});
+
+watch(() => route.fullPath, () => {
+  if (closeButtonEl.value !== null) {
+    closeButtonEl.value.click();
+  }
 });
 </script>
 
@@ -27,7 +34,7 @@ export default defineComponent({
 
       <!-- Navbar button for small screen devices -->
       <div class="flex md:order-2">
-        <button data-collapse-toggle="navbar-cta" type="button"
+        <button id="navbarMainMenuButton" data-collapse-toggle="navbar-cta" type="button"
                 class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 md:hover:text-blue-700 dark:text-gray-400 dark:hover:bg-gray-700"
                 aria-controls="navbar-cta" aria-expanded="false">
           <span class="sr-only">Open main menu</span>

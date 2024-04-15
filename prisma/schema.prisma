@@ -10,7 +10,7 @@ datasource db {
 model articles {
   id          Int           @id @default(autoincrement())
   image_url   String        @db.Text
-  title       String        @db.VarChar(60)
+  title String @db.VarChar(120)
   summary     String        @db.VarChar(135)
   content     Json          @db.Json
   author_uuid String        @db.VarChar(36)

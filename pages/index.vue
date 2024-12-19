@@ -33,23 +33,23 @@ try {
       <NuxtPicture preload :imgAttrs="{class:'w-full h-[99vh] object-cover'}" src="/atas-blur-min.webp"/>
 
       <!-- Card header -->
-      <!--      <div-->
-      <!--          class="p-6 pt-10 pb-10 w-[95%] md:max-w-lg min-h-[250px] md:min-h-[230px] mx-auto bg-white rounded-md shadow-sm flex items-center space-x-4 absolute right-2 md:right-[8rem] top-[8rem] md:top-[12rem]">-->
-      <!--        <div>-->
-      <!--          <h2 class="text-3xl font-normal text-black pb-5">SMK Negeri 2 Tabanan</h2>-->
-      <!--          <p class="text-slate-500">Terwujudnya Peserta Didik Yang Terdidik, Cerdas, Terampil, Mandiri dan Berdaya Saing-->
-      <!--            Global</p>-->
+      <div
+          class="p-6 pt-10 pb-10 w-[95%] md:max-w-lg min-h-[250px] md:min-h-[230px] mx-auto bg-white rounded-md shadow-sm flex items-center space-x-4 absolute right-2 md:right-[8rem] top-[8rem] md:top-[12rem]">
+        <div>
+          <h2 class="text-3xl font-normal text-black pb-5">SMK Negeri 2 Tabanan</h2>
+          <p class="text-slate-500">Terwujudnya Peserta Didik Yang Terdidik, Cerdas, Terampil, Mandiri dan Berdaya Saing
+            Global</p>
 
-      <!--          <div class="my-6"></div>-->
+          <div class="my-6"></div>
 
-      <!--          <NuxtLink href="/artikel/pengumuman/cari?q=Info%20PPDB">-->
-      <!--            <button type="button"-->
-      <!--                    class="text-white bg-blue-600 hover:bg-blue-800 font-normal rounded-md text-normal px-4 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:ring-blue-800 transition duration-200">-->
-      <!--              INFO PPDB-->
-      <!--            </button>-->
-      <!--          </NuxtLink>-->
-      <!--        </div>-->
-      <!--      </div>-->
+          <NuxtLink href="/artikel/pengumuman/cari?q=Info%20PPDB">
+            <button type="button"
+                    class="text-white bg-blue-600 hover:bg-blue-800 font-normal rounded-md text-normal px-4 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:ring-blue-800 transition duration-200">
+              INFO PPDB
+            </button>
+          </NuxtLink>
+        </div>
+      </div>
     </div>
 
     <!-- Kompetensi Keahlian section -->
